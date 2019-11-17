@@ -13,13 +13,17 @@ const loginCheck = () => {
     if (req.user) {
       next();
     } else {
-      res.redirect("/");
+      res.redirect("/auth/login");
     }
   };
 };
 
 router.get('/search', (req, res, next) => {
   res.render('search')
+})
+
+router.get('/addTicket', loginCheck(), (req, res, next) => {
+  res.render('addTicket')
 })
 
 module.exports = router;

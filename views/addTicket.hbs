@@ -1,0 +1,24 @@
+{{!-- {{#if loggedIn}} --}}
+<h2>When is your ticket available?</h2>
+<div class="form-wrapper">
+  <form class="search-form" action="/profile/tickets" method="post">
+    <label for="ticketId">Ticket Number: </label>
+    <input type="string" name="ticketId" id="ticketId" placeholder="TICKET NUMBER">
+    <label for="from">From: </label>
+    <input type="date" name="from" id="from" placeholder="FROM">
+    <label for="until">Until: </label>
+    <input type="date" name="until" id="until" placeholder="UNTIL">
+    <div class="toggle">
+      <input type="radio" name="zone" value="AB" id="AB" checked="checked" />
+      <label for="AB">AB</label>
+      <input type="radio" name="zone" value="ABC" id="ABC" />
+      <label for="ABC">ABC</label>
+    </div>
+    <button class="btn" type="submit">OFFER your TICKET!</button>
+  </form>
+</div>
+{{!-- {{else}}
+<script>
+  // redirect the user to the login page
+</script>
+{{/if}} --}}

@@ -7,6 +7,9 @@ const reviewSchema = new Schema({
   rating: {
     type: Number,
     min: 1,
-    max: 12
+    max: 5
   }
 });
+
+const Review = mongoose.model('Review', reviewSchema);
+module.exports = Review;
