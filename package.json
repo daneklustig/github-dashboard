@@ -27,5 +27,21 @@
   },
   "devDependencies": {
     "nodemon": "^1.12.1"
-  }
+  },
+  "main": "app.js",
+  "bin": {
+    "github-dashboard": "seeds.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daneklustig/github-dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daneklustig/github-dashboard/issues"
+  },
+  "homepage": "https://github.com/daneklustig/github-dashboard#readme",
+  "description": ""
 }
