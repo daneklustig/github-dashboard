@@ -13,7 +13,7 @@ const loginCheck = () => {
     if (req.user) {
       next();
     } else {
-      res.redirect("/auth/login");
+      res.redirect("/auth/loginCheck");
     }
   };
 };
@@ -25,5 +25,7 @@ router.get('/search', (req, res, next) => {
 router.get('/addTicket', loginCheck(), (req, res, next) => {
   res.render('addTicket')
 })
+
+
 
 module.exports = router;
