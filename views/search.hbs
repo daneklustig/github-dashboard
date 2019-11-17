@@ -1,8 +1,16 @@
 <h2>When do you need a ticket?</h2>
 <div class="form-wrapper">
   <form class="search-form" action="/availableTickets" method="get">
+    <label for="from">From: </label>
     <input type="date" name="from" id="from" placeholder="FROM">
+    <label for="until">Until: </label>
     <input type="date" name="until" id="until" placeholder="UNTIL">
+    <div class="toggle">
+      <input type="radio" name="zone" value="AB" id="AB" checked="checked" />
+      <label for="AB">AB</label>
+      <input type="radio" name="zone" value="ABC" id="ABC" />
+      <label for="ABC">ABC</label>
+    </div>
     <button class="btn" type="submit">GET your TICKET!</button>
   </form>
 </div>
