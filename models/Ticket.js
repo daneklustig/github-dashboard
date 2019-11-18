@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ticketSchema = new Schema({
-  availableFrom: Date,
-  availableUntil: Date,
+  availableFrom: { type: String, dateFrom: new Date("<YYYY-mm-dd>") },
+  availableUntil: { type: String, dateUntil: new Date("<YYYY-mm-dd>") },
   zone: {
     type: String,
     enum: ["AB", "ABC"]
