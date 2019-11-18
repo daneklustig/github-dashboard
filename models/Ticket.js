@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const ticketSchema = new Schema({
@@ -12,7 +11,8 @@ const ticketSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  ticketId: Number
 });
 
 const Ticket = mongoose.model("Ticket", ticketSchema);
