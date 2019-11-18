@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Ticket = require("../models/Ticket");
+const User = require('../models/User')
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -38,30 +39,19 @@ const loginCheck3 = () => {
     }
   };
 };
+router.get("/profile/tickets", loginCheck2(), (req, res, next) => {
+  //res.send('TICKETS')
 
-router.get("/search", loginCheck3(), (req, res, next) => {
-  res.render("search"), {
-    loggedIn: req.user
-  };
-});
-
-router.get("/addTicket", loginCheck2(), (req, res, next) => {
-  res.render("addTicket", {
-    loggedIn: req.user
-  });
-});
-
-router.post("/addTicket", loginCheck2(), (req, res, next) => {
-  console.log("POST SERVER");
-  Ticket.create({
-      availableFrom: req.body.from,
-      availableUntil: req.body.until,
-      zone: req.body.zone,
-      owner: req.user._id,
-      ticketId: req.body.ticketId
+  const owner = req.user;
+  Ticket.find({
+      owner
     })
-    .then(ticket => {
-      res.redirect(`/profile/tickets`);
+    .populate("owner")
+    .then(tickets => {
+      return res.render("myTickets", {
+        tickets: tickets,
+        loggedIn: req.user
+      });
     })
     .catch(err => {
       next(err);
@@ -81,22 +71,38 @@ router.get("/profile/:userId", loginCheck1(), (req, res, next) => {
     });
 })
 
-router.get("/profile/tickets", loginCheck1(), (req, res, next) => {
-  const user = req.user;
-  Ticket.find({
-      owner: user
+
+router.get("/addTicket", loginCheck2(), (req, res, next) => {
+  res.render("addTicket", {
+    loggedIn: req.user
+  });
+});
+
+router.post("/addTicket", loginCheck2(), (req, res, next) => {
+  console.log("POST SERVER");
+  Ticket.create({
+      availableFrom: req.body.from,
+      availableUntil: req.body.until,
+      zone: req.body.zone,
+      owner: req.user._id,
+      ticketId: req.body.ticketId
     })
-    .populate("owner")
-    .then(tickets => {
-      return res.render("myTickets", {
-        tickets: tickets,
-        loggedIn: req.user
-      });
+    .then(() => {
+      //res.send('HE')
+
+      res.redirect(`/profile/tickets`);
     })
     .catch(err => {
       next(err);
     });
 });
+
+router.get("/search", loginCheck3(), (req, res, next) => {
+  res.render("search", {
+    loggedIn: req.user
+  });
+});
+
 
 router.get("/profile/:ticketId", (req, res) => {
   // const id = ....
