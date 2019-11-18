@@ -24,7 +24,9 @@ router.get("/search", (req, res, next) => {
 });
 
 router.get("/addTicket", loginCheck(), (req, res, next) => {
-  res.render("addTicket");
+  res.render("addTicket", {
+    loggedIn: req.user
+  });
 });
 
 router.post("/addTicket", loginCheck(), (req, res, next) => {
@@ -44,12 +46,12 @@ router.post("/addTicket", loginCheck(), (req, res, next) => {
     });
 });
 
-router.get("/profile/tickets", (req, res, next) => {
+router.get("/profile/tickets", loginCheck(), (req, res, next) => {
   const user = req.user;
   Ticket.find({ owner: user })
     .populate("owner")
     .then(tickets => {
-      return res.render("myTickets", { tickets: tickets });
+      return res.render("myTickets", { tickets: tickets, loggedIn: req.user });
     })
     .catch(err => {
       next(err);
