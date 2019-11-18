@@ -14,7 +14,7 @@ const loginCheck = () => {
     if (req.user) {
       next();
     } else {
-      res.redirect("/auth/loginCheck");
+      res.redirect("/auth/loginCheck2");
     }
   };
 };
@@ -32,12 +32,12 @@ router.get("/addTicket", loginCheck(), (req, res, next) => {
 router.post("/addTicket", loginCheck(), (req, res, next) => {
   console.log("POST SERVER");
   Ticket.create({
-    availableFrom: req.body.from,
-    availableUntil: req.body.until,
-    zone: req.body.zone,
-    owner: req.user._id,
-    ticketId: req.body.ticketId
-  })
+      availableFrom: req.body.from,
+      availableUntil: req.body.until,
+      zone: req.body.zone,
+      owner: req.user._id,
+      ticketId: req.body.ticketId
+    })
     .then(ticket => {
       res.redirect(`/profile/tickets`);
     })
@@ -48,10 +48,15 @@ router.post("/addTicket", loginCheck(), (req, res, next) => {
 
 router.get("/profile/tickets", loginCheck(), (req, res, next) => {
   const user = req.user;
-  Ticket.find({ owner: user })
+  Ticket.find({
+      owner: user
+    })
     .populate("owner")
     .then(tickets => {
-      return res.render("myTickets", { tickets: tickets, loggedIn: req.user });
+      return res.render("myTickets", {
+        tickets: tickets,
+        loggedIn: req.user
+      });
     })
     .catch(err => {
       next(err);

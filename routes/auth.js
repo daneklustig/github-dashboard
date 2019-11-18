@@ -8,15 +8,41 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 
-router.get("/login", (req, res, next) => {
-  res.render("auth/login", {
+router.get("/login1", (req, res, next) => {
+  res.render("auth/login1", {
     "message": req.flash("error")
   });
 });
 
-router.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/auth/login",
+router.post("/login1", passport.authenticate("local", {
+  successRedirect: "/profile",
+  failureRedirect: "/auth/login1",
+  failureFlash: true,
+  passReqToCallback: true
+}));
+
+router.get("/login2", (req, res, next) => {
+  res.render("auth/login2", {
+    "message": req.flash("error")
+  });
+});
+
+router.post("/login2", passport.authenticate("local", {
+  successRedirect: "/addTicket",
+  failureRedirect: "/auth/login2",
+  failureFlash: true,
+  passReqToCallback: true
+}));
+
+router.get("/login3", (req, res, next) => {
+  res.render("auth/login3", {
+    "message": req.flash("error")
+  });
+});
+
+router.post("/login3", passport.authenticate("local", {
+  successRedirect: "/search",
+  failureRedirect: "/auth/login3",
   failureFlash: true,
   passReqToCallback: true
 }));
@@ -70,8 +96,12 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/loginCheck", (req, res) => {
-  res.render("auth/loginCheck")
+router.get("/loginCheck2", (req, res) => {
+  res.render("auth/loginCheck2")
+})
+
+router.get("/loginCheck3", (req, res) => {
+  res.render("auth/loginCheck3")
 })
 
 module.exports = router;
