@@ -33,8 +33,8 @@ router.post("/addTicket", loginCheck(), (req, res, next) => {
     availableFrom: req.body.from,
     availableUntil: req.body.until,
     zone: req.body.zone,
-    owner: req.user._id
-    // ticketId: req.body.ticketId
+    owner: req.user._id,
+    ticketId: req.body.ticketId
   })
     .then(ticket => {
       res.redirect(`/profile/tickets`);
@@ -46,7 +46,6 @@ router.post("/addTicket", loginCheck(), (req, res, next) => {
 
 router.get("/profile/tickets", (req, res, next) => {
   const user = req.user;
-
   Ticket.find({ owner: user })
     .populate("owner")
     .then(tickets => {
