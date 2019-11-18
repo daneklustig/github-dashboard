@@ -1,10 +1,16 @@
 @font-face {
   font-family: frutiger;
-  src: url("/fonts/bvg.otf");
-  font-style: italic; }
+  src: url("/fonts/bvg.otf"); }
 
 * {
   font-family: frutiger; }
+
+.yellow {
+  background-color: #FFE44D;
+  font-style: italic;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 15px; }
 
 /* VARS */
 /* MIXINS */
