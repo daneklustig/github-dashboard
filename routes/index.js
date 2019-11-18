@@ -109,4 +109,19 @@ router.get("/profile/:ticketId", (req, res) => {
   // Ticket.fondOne(...).then(ticket => ....).catch(err => ...)
 });
 
+
+router.get("/profile/tickets/:ticketId/delete", loginCheck2(), (req, res) => {
+  const query = {
+    _id: req.params.ticketId
+  };
+
+  Ticket.deleteOne(query)
+    .then(() => {
+      res.redirect("/profile/tickets")
+    })
+    .catch(err => {
+      next(err)
+    })
+})
+
 module.exports = router;
