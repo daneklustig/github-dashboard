@@ -110,6 +110,20 @@ router.get("/profile/:ticketId", (req, res) => {
 });
 
 
+router.post("/availableTickets", loginCheck3(), (req, res, next) => {
+  const {from, until, zone} = req.body;
+
+  Ticket.find({availableFrom: {$gte: 20}, availableUntil: {$lte: 24}, zone: zone })
+    .then(tickets => {
+      res.render("availableTickets.hbs", {
+        tickets: tickets
+      });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
 router.get("/profile/tickets/:ticketId/delete", loginCheck2(), (req, res) => {
   const query = {
     _id: req.params.ticketId
