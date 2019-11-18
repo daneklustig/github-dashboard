@@ -96,6 +96,10 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+router.get("/loginCheck1", (req, res) => {
+  res.render("auth/loginCheck1")
+})
+
 router.get("/loginCheck2", (req, res) => {
   res.render("auth/loginCheck2")
 })
