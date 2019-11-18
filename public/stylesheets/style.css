@@ -1,15 +1,16 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600");
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+@font-face {
+  font-family: frutiger;
+  src: url("/fonts/bvg.otf");
+  font-style: italic; }
 
-a {
-  color: #00B7FF; }
+* {
+  font-family: frutiger; }
 
 /* VARS */
 /* MIXINS */
 /* STYLE THE HTML ELEMENTS (INCLUDES RESETS FOR THE DEFAULT FIELDSET AND LEGEND STYLES) */
-body, html {
+body,
+html {
   margin: 0;
   padding: 1rem;
   box-sizing: border-box;
@@ -72,7 +73,7 @@ body:not(:-moz-handler-blocked) fieldset {
     font-weight: 600;
     text-align: center;
     box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-    transition: border-color .15s ease-out,  color .25s ease-out,  background-color .15s ease-out, box-shadow .15s ease-out; }
+    transition: border-color .15s ease-out, color .25s ease-out, background-color .15s ease-out, box-shadow .15s ease-out; }
     .toggle input + label:first-of-type {
       border-radius: 6px 0 0 6px;
       border-right: none; }
