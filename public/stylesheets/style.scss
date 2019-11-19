@@ -31,15 +31,15 @@ h2 {
 	top: 50%;
 	left: 50%;
 	margin-right: -50%;
-	transform: translate(-50%, -50%)
+	transform: translate(-50%, -50%);
 }
 
 .yellow {
-	background-color: #FFE44D;
+	background-color: #ffe44d;
 	font-style: italic;
 	font-weight: bold;
 	padding-left: 10px;
-	padding-right: 15px
+	padding-right: 15px;
 }
 
 .first-line {
@@ -86,6 +86,7 @@ h2 {
 	top: 1px;
 }
 
+
 .ticket {
 	width: 80vw;
 	height: 15vh;
@@ -114,19 +115,18 @@ h2 {
 
 
 
-
-
+/* VARS */
 $darkNavy: #213140;
-$teal1: #66B3FB;
-$teal2: #4B9DEA;
+$teal1: #66b3fb;
+$teal2: #4b9dea;
 $charcoal: #555555;
 
-$activeShadow: 0 0 10px rgba($teal1, .5);
+$activeShadow: 0 0 10px rgba($teal1, 0.5);
 
 /* MIXINS */
 @mixin focusOutline {
-	outline: dotted 1px #CCC;
-	outline-offset: .45rem;
+	outline: dotted 1px #ccc;
+	outline-offset: 0.45rem;
 }
 
 @mixin hideInput {
@@ -139,13 +139,13 @@ $activeShadow: 0 0 10px rgba($teal1, .5);
 @mixin breakpoint($point) {
 	@if $point==1100 {
 		@media (max-width: 1100px) {
-			@content ;
+			@content;
 		}
 	}
 
 	@else if $point==800 {
 		@media (max-width: 800px) {
-			@content ;
+			@content;
 		}
 	}
 }
@@ -153,111 +153,151 @@ $activeShadow: 0 0 10px rgba($teal1, .5);
 /* STYLE THE HTML ELEMENTS (INCLUDES RESETS FOR THE DEFAULT FIELDSET AND LEGEND STYLES) */
 body,
 html {
+	margin: 0;
+	box-sizing: border-box;
 	width: 100%;
 	height: 100%;
 	font-size: 16px;
 	-webkit-font-smoothing: antialiased;
-	background-color: #EEE;
-}
+	background-color: #eee;
 
-fieldset {
-	margin: 0;
-	padding: 2rem;
-	box-sizing: border-box;
-	display: block;
-	border: none;
-	border: solid 1px #CCC;
-	min-width: 0;
-	background-color: #FFF;
-
-	legend {
-		margin: 0 0 1.5rem;
-		padding: 0;
-		width: 100%;
-		float: left;
-		display: table;
-		font-size: 1.5rem;
-		line-height: 140%;
-		font-weight: 600;
-		color: #333;
-
-		+* {
-			clear: both;
-		}
-	}
-}
-
-body:not(:-moz-handler-blocked) fieldset {
-	display: table-cell;
-}
-
-/* TOGGLE STYLING */
-.toggle {
-	margin: 0 0 1.5rem;
-	box-sizing: border-box;
-	font-size: 0;
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: flex-start;
-	align-items: stretch;
-
-	input {
-		@include hideInput;
-	}
-
-	input+label {
+	fieldset {
 		margin: 0;
-		padding: .75rem 2rem;
+		padding: 2rem;
 		box-sizing: border-box;
-		position: relative;
-		display: inline-block;
-		border: solid 1px #DDD;
-		background-color: #FFF;
-		font-size: 1rem;
-		line-height: 140%;
-		font-weight: 600;
-		text-align: center;
-		box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-		transition: border-color .15s ease-out,
-			color .25s ease-out,
-			background-color .15s ease-out,
-			box-shadow .15s ease-out;
+		display: block;
+		border: none;
+		border: solid 1px #ccc;
+		min-width: 0;
+		background-color: #fff;
 
+		legend {
+			margin: 0 0 1.5rem;
+			padding: 0;
+			width: 100%;
+			float: left;
+			display: table;
+			font-size: 1.5rem;
+			line-height: 140%;
+			font-weight: 600;
+			color: #333;
 
-		&:first-of-type {
-			border-radius: 6px 0 0 6px;
-			border-right: none;
-		}
-
-		&:last-of-type {
-			border-radius: 0 6px 6px 0;
-			border-left: none;
+			+* {
+				clear: both;
+			}
 		}
 	}
 
-	input:hover+label {
-		border-color: $darkNavy;
+	body:not(:-moz-handler-blocked) fieldset {
+		display: table-cell;
 	}
 
-	input:checked+label {
-		background-color: $teal2;
-		color: #FFF;
-		box-shadow: $activeShadow;
-		border-color: $teal2;
-		z-index: 1;
-	}
+	/* TOGGLE STYLING */
+	.toggle {
+		margin: 0 0 1.5rem;
+		box-sizing: border-box;
+		font-size: 0;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: flex-start;
+		align-items: stretch;
 
-	input:focus+label {
-		@include focusOutline;
-	}
+		input {
+			@include hideInput;
+		}
 
-	@include breakpoint(800) {
 		input+label {
-			padding: .75rem .25rem;
-			flex: 0 0 50%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
+			margin: 0;
+			padding: 0.75rem 2rem;
+			box-sizing: border-box;
+			position: relative;
+			display: inline-block;
+			border: solid 1px #ddd;
+			background-color: #fff;
+			font-size: 1rem;
+			line-height: 140%;
+			font-weight: 600;
+			text-align: center;
+			box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+			transition: border-color 0.15s ease-out, color 0.25s ease-out,
+				background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+
+			&:first-of-type {
+				border-radius: 6px 0 0 6px;
+				border-right: none;
+			}
+
+			&:last-of-type {
+				border-radius: 0 6px 6px 0;
+				border-left: none;
+			}
 		}
+
+		input:hover+label {
+			border-color: $darkNavy;
+		}
+
+		input:checked+label {
+			background-color: $teal2;
+			color: #fff;
+			box-shadow: $activeShadow;
+			border-color: $teal2;
+			z-index: 1;
+		}
+
+		input:focus+label {
+			@include focusOutline;
+		}
+
+		@include breakpoint(800) {
+			input+label {
+				padding: 0.75rem 0.25rem;
+				flex: 0 0 50%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+	}
+
+	// .customStyle {
+	//   border: 5px black solid;
+	//   padding-top: 20px;
+	//   padding-bottom: 20px;
+	// }
+
+	// .labelclass1 {
+	//   display: flex;
+	//   flex-direction: row;
+	//   width: 30%;
+	//   justify-content: flex-start;
+	//   align-content: center;
+	// }
+
+	// .inputclass1 {
+	//   display: flex;
+	//   flex-direction: row;
+	//   width: 30%;
+	//   justify-content: flex-start;
+	//   align-content: center;
+	// }
+
+	.labelclass {
+		display: flex;
+		flex-direction: row;
+		width: 200px;
+		text-align: right;
+	}
+
+	.inputclass {
+		display: flex;
+		flex-direction: row;
+		width: 200px;
+		text-align: left;
+	}
+
+	.container {
+		display: flex;
+		flex-direction: row;
 	}
 }
