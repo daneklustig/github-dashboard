@@ -15,7 +15,7 @@ const loginCheck1 = () => {
     if (req.user) {
       next();
     } else {
-      res.redirect("/profile/:userId");
+      res.redirect(`/auth/loginCheck1`);
     }
   };
 };
@@ -58,8 +58,8 @@ router.get("/profile/tickets", loginCheck2(), (req, res, next) => {
     });
 });
 
-router.get("/profile/:userId", loginCheck1(), (req, res, next) => {
-  User.findById(req.params.userId)
+router.get("/profile", loginCheck1(), (req, res, next) => {
+  User.findById(req.user.id)
     .then(user => {
       res.render("profile", {
         user: user,
@@ -143,8 +143,8 @@ router.get("/profile/tickets/:ticketId/delete", loginCheck2(), (req, res) => {
     });
 });
 
-router.post("/profile/:userId", loginCheck1(), (req, res, next) => {
-  const id = req.params.userId;
+router.post("/profile", loginCheck1(), (req, res, next) => {
+  const id = req.user.id;
   User.findOneAndUpdate(
     { _id: id },
     {
@@ -172,7 +172,7 @@ router.get(
 );
 
 router.get("/about", (req, res) => {
-  res.render("about");
+  res.render("about", { loggedIn: req.user });
 });
 
 module.exports = router;
