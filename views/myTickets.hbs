@@ -1,13 +1,19 @@
 <h2>Your available tickets</h2>
 <br>
+
+<div class="available-tickets">
 {{#each tickets}}
+<div class="ticket">
 <h4>Ticket number: {{ticketId}}</h4>
+<div class="date"></div>
 <p>Available from: {{availableFrom}}</p>
 <p>Available until: {{availableUntil}}</p>
 <p>Zone: {{zone}}</p>
 <p>Owner: {{owner.username}}</p>
 <a href="/profile/tickets/{{_id}}/delete">Delete this ticket</a>
+</div>
 {{/each}}
+</div>
 
 
 

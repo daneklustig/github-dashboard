@@ -169,6 +169,7 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
       },
       // zone: zone
     })
+    .populate("owner")
     .then(tickets => {
       const totalTest = {
         totalPrice: totalPrice
@@ -185,7 +186,9 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
       // totalPrice
 
       res.render("availableTickets.hbs", {
-        allTickets
+        allTickets,
+        from,
+        until
         // price: totalPrice
       });
 

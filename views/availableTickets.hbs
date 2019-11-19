@@ -1,21 +1,26 @@
-<h2><span class="yellow">Available tickets</span></h2>
-<br>
+<div class="content">
+  {{#if allTickets}}
+  <h2><span class="yellow first-line">There are {{allTickets.length}} available tickets</span></h2>
+  <h2><span class="yellow second-line">from: {{from}}</span></h2>
+  <h2><span class="yellow third-line">until: {{until}}</span></h2>
 
 
-
-<div class="available-tickets"></div>
-{{#each allTickets}}
-<div class="ticket">
-  <div class="zone col-4">
-    <p>{{zone}}</p>
+  <div class="available-tickets">
+    {{#each allTickets}}
+    <div class="ticket">
+      <div class="zone col-4">
+        <p class="m-0">{{zone}}</p>
+      </div>
+      <div class="price col-4">
+        <p class="m-0">{{totalPrice}} EUR</p>
+      </div>
+      <div class="contact col-4">
+        <p class="m-0">Contact {{owner.username}}</p>
+      </div>
+    </div>
+    {{/each}}
   </div>
-  <div class="price col-4">
-    <p>{{totalPrice}}</p>
-
-  </div>
-  <div class="contact col-4">
-    <p>Contact {{owner}}</p>
-  </div>
-</div>
-{{/each}}
+  {{else}}
+  <h2><span class="yellow">Unfortunately, there are no available tickets for this period</span></h2>
+  {{/if}}
 </div>
