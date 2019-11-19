@@ -1,9 +1,21 @@
-<h2>Your available tickets</h2>
+<h2><span class="yellow">Available tickets</span></h2>
 <br>
-{{#each tickets}}
-<h4>Ticket number: {{ticketId}}</h4>
-<p>Available from: {{availableFrom}}</p>
-<p>Available until: {{availableUntil}}</p>
-<p>Zone: {{zone}}</p>
-<p>Owner: {{owner.username}}</p>
+
+
+
+<div class="available-tickets"></div>
+{{#each allTickets}}
+<div class="ticket">
+  <div class="zone col-4">
+    <p>{{zone}}</p>
+  </div>
+  <div class="price col-4">
+    <p>{{totalPrice}}</p>
+
+  </div>
+  <div class="contact col-4">
+    <p>Contact {{owner}}</p>
+  </div>
+</div>
 {{/each}}
+</div>

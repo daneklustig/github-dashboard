@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Ticket = require("../models/Ticket");
-const User = require('../models/User')
+const User = require("../models/User");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -64,13 +64,12 @@ router.get("/profile/:userId", loginCheck1(), (req, res, next) => {
       res.render("profile", {
         user: user,
         loggedIn: req.user
-      })
+      });
     })
     .catch(err => {
-      next(err)
+      next(err);
     });
-})
-
+});
 
 router.get("/addTicket", loginCheck2(), (req, res, next) => {
   res.render("addTicket", {
@@ -83,7 +82,7 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
   const {
     from,
     until
-  } = req.body
+  } = req.body;
   Ticket.create({
       availableFrom: req.body.from,
       availableUntil: req.body.until,
@@ -92,7 +91,6 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
       ticketId: req.body.ticketId
     })
     .then(() => {
-
       res.redirect(`/profile/tickets`);
     })
     .catch(err => {
@@ -106,20 +104,61 @@ router.get("/search", loginCheck3(), (req, res, next) => {
   });
 });
 
-
 router.get("/profile/:ticketId", (req, res) => {
   // const id = ....
   // Ticket.fondOne(...).then(ticket => ....).catch(err => ...)
 });
 
-
 router.post("/availableTickets", loginCheck3(), (req, res, next) => {
   let {
     from,
     until,
-    zone
+    // zone
   } = req.body;
 
+  let dateFrom = new Date(from).getTime();
+  let dateUntil = new Date(until).getTime();
+  let days = (dateUntil - dateFrom) / (1000 * 3600 * 24) + 1;
+
+  // let price;
+
+  // if (zone === "AB" && days < 7) {
+  //   price = 3;
+  // } else if (zone === "AB" && days < 14) {
+  //   price = 2.5;
+  // } else if (zone === "AB") {
+  //   price = 2;
+  // } else if (zone === "ABC" && days < 7) {
+  //   price = 3.5;
+  // } else if (zone === "ABC" && days < 14) {
+  //   price = 3;
+  // } else {
+  //   price = 2.5;
+  // }
+
+  // totalPrice = days * price;
+  const totalPrice = (days, zone) => {
+    let price;
+
+    if (zone === "AB" && days < 7) {
+      price = 3;
+    } else if (zone === "AB" && days < 14) {
+      price = 2.5;
+    } else if (zone === "AB") {
+      price = 2;
+    } else if (zone === "ABC" && days < 7) {
+      price = 3.5;
+    } else if (zone === "ABC" && days < 14) {
+      price = 3;
+    } else {
+      price = 2.5;
+    }
+
+    return price * days
+  }
+
+
+  // console.log(zone, days, totalPrice);
 
   Ticket.find({
       availableFrom: {
@@ -128,13 +167,28 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
       availableUntil: {
         $gte: until
       },
-      zone: zone
+      // zone: zone
     })
     .then(tickets => {
-      console.log('´´´´´´´´´´´´´´´´´´', tickets)
+      const totalTest = {
+        totalPrice: totalPrice
+      }
+      console.log(totalPrice);
+
+      const allTickets = tickets.map(el => {
+        el.totalPrice = totalPrice(days, el.zone)
+        // console.log(el.totalPrice)
+        return el
+      })
+      // tickets.totalPrice = totalPrice
+      console.log("HI DANIEL, ", allTickets[0])
+      // totalPrice
+
       res.render("availableTickets.hbs", {
-        tickets: tickets
+        allTickets
+        // price: totalPrice
       });
+
     })
     .catch(err => {
       next(err);
@@ -148,11 +202,11 @@ router.get("/profile/tickets/:ticketId/delete", loginCheck2(), (req, res) => {
 
   Ticket.deleteOne(query)
     .then(() => {
-      res.redirect("/profile/tickets")
+      res.redirect("/profile/tickets");
     })
     .catch(err => {
-      next(err)
-    })
-})
+      next(err);
+    });
+});
 
 module.exports = router;

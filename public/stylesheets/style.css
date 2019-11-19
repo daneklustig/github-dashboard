@@ -55,6 +55,16 @@ h2 {
   position: relative;
   top: 1px; }
 
+.ticket {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; }
+
+.available-tickets {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
 /* VARS */
 /* MIXINS */
 /* STYLE THE HTML ELEMENTS (INCLUDES RESETS FOR THE DEFAULT FIELDSET AND LEGEND STYLES) */
