@@ -80,6 +80,10 @@ router.get("/addTicket", loginCheck2(), (req, res, next) => {
 
 router.post("/addTicket", loginCheck2(), (req, res, next) => {
   console.log("POST SERVER");
+  const {
+    from,
+    until
+  } = req.body
   Ticket.create({
       availableFrom: req.body.from,
       availableUntil: req.body.until,
@@ -88,7 +92,6 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
       ticketId: req.body.ticketId
     })
     .then(() => {
-      //res.send('HE')
 
       res.redirect(`/profile/tickets`);
     })
@@ -111,10 +114,24 @@ router.get("/profile/:ticketId", (req, res) => {
 
 
 router.post("/availableTickets", loginCheck3(), (req, res, next) => {
-  const {from, until, zone} = req.body;
+  let {
+    from,
+    until,
+    zone
+  } = req.body;
 
-  Ticket.find({availableFrom: {$gte: 20}, availableUntil: {$lte: 24}, zone: zone })
+
+  Ticket.find({
+      availableFrom: {
+        $lte: from
+      },
+      availableUntil: {
+        $gte: until
+      },
+      zone: zone
+    })
     .then(tickets => {
+      console.log('´´´´´´´´´´´´´´´´´´', tickets)
       res.render("availableTickets.hbs", {
         tickets: tickets
       });
