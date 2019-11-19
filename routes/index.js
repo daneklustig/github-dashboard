@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Ticket = require("../models/Ticket");
-const User = require('../models/User')
+const User = require("../models/User");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -44,8 +44,8 @@ router.get("/profile/tickets", loginCheck2(), (req, res, next) => {
 
   const owner = req.user;
   Ticket.find({
-      owner
-    })
+    owner
+  })
     .populate("owner")
     .then(tickets => {
       return res.render("myTickets", {
@@ -64,13 +64,12 @@ router.get("/profile/:userId", loginCheck1(), (req, res, next) => {
       res.render("profile", {
         user: user,
         loggedIn: req.user
-      })
+      });
     })
     .catch(err => {
-      next(err)
+      next(err);
     });
-})
-
+});
 
 router.get("/addTicket", loginCheck2(), (req, res, next) => {
   res.render("addTicket", {
@@ -80,19 +79,15 @@ router.get("/addTicket", loginCheck2(), (req, res, next) => {
 
 router.post("/addTicket", loginCheck2(), (req, res, next) => {
   console.log("POST SERVER");
-  const {
-    from,
-    until
-  } = req.body
+  const { from, until } = req.body;
   Ticket.create({
-      availableFrom: req.body.from,
-      availableUntil: req.body.until,
-      zone: req.body.zone,
-      owner: req.user._id,
-      ticketId: req.body.ticketId
-    })
+    availableFrom: req.body.from,
+    availableUntil: req.body.until,
+    zone: req.body.zone,
+    owner: req.user._id,
+    ticketId: req.body.ticketId
+  })
     .then(() => {
-
       res.redirect(`/profile/tickets`);
     })
     .catch(err => {
@@ -106,32 +101,25 @@ router.get("/search", loginCheck3(), (req, res, next) => {
   });
 });
 
-
 router.get("/profile/:ticketId", (req, res) => {
   // const id = ....
   // Ticket.fondOne(...).then(ticket => ....).catch(err => ...)
 });
 
-
 router.post("/availableTickets", loginCheck3(), (req, res, next) => {
-  let {
-    from,
-    until,
-    zone
-  } = req.body;
-
+  let { from, until, zone } = req.body;
 
   Ticket.find({
-      availableFrom: {
-        $lte: from
-      },
-      availableUntil: {
-        $gte: until
-      },
-      zone: zone
-    })
+    availableFrom: {
+      $lte: from
+    },
+    availableUntil: {
+      $gte: until
+    },
+    zone: zone
+  })
     .then(tickets => {
-      console.log('´´´´´´´´´´´´´´´´´´', tickets)
+      console.log("´´´´´´´´´´´´´´´´´´", tickets);
       res.render("availableTickets.hbs", {
         tickets: tickets
       });
@@ -148,11 +136,43 @@ router.get("/profile/tickets/:ticketId/delete", loginCheck2(), (req, res) => {
 
   Ticket.deleteOne(query)
     .then(() => {
-      res.redirect("/profile/tickets")
+      res.redirect("/profile/tickets");
     })
     .catch(err => {
-      next(err)
+      next(err);
+    });
+});
+
+router.post("/profile/:userId", loginCheck1(), (req, res, next) => {
+  const id = req.params.userId;
+  User.findOneAndUpdate(
+    { _id: id },
+    {
+      gender: req.body.gender,
+      name: req.body.name,
+      surname: req.body.surname,
+      email: req.body.email
+    },
+    { new: true }
+  )
+    .then(updatedUser => {
+      res.send(updatedUser);
     })
-})
+    .catch(err => console.log(err));
+});
+
+router.get(
+  "/availableTickets/ticketOverview",
+  loginCheck3(),
+  (req, res, next) => {
+    res.render("ticketOverview", {
+      loggedIn: req.user
+    });
+  }
+);
+
+router.get("/about", (req, res) => {
+  res.render("about");
+});
 
 module.exports = router;
