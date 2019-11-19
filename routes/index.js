@@ -188,7 +188,8 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
       res.render("availableTickets.hbs", {
         allTickets,
         from,
-        until
+        until,
+        loggedIn: req.user
         // price: totalPrice
       });
 
@@ -230,15 +231,7 @@ router.post("/profile", loginCheck1(), (req, res, next) => {
     .catch(err => console.log(err));
 });
 
-router.get(
-  "/availableTickets/ticketOverview",
-  loginCheck3(),
-  (req, res, next) => {
-    res.render("ticketOverview", {
-      loggedIn: req.user
-    });
-  }
-);
+
 
 router.get("/about", (req, res) => {
   res.render("about", {
