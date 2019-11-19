@@ -1,20 +1,28 @@
-<h2>Your available tickets</h2>
-<br>
+<div class="content">
+  <h2><span class="yellow first-line">You have offered {{tickets.length}} tickets</h2></span>
+  <br>
 
-<div class="available-tickets">
-{{#each tickets}}
-<div class="ticket">
-<h4>Ticket number: {{ticketId}}</h4>
-<div class="date"></div>
-<p>Available from: {{availableFrom}}</p>
-<p>Available until: {{availableUntil}}</p>
-<p>Zone: {{zone}}</p>
-<p>Owner: {{owner.username}}</p>
-<a href="/profile/tickets/{{_id}}/delete">Delete this ticket</a>
+  <div class="available-tickets">
+    {{#each tickets}}
+    <div class="ticket">
+      <div class="col-2 ">
+        <p class="m-0 p-0">{{zone}}</p>
+      </div>
+      <div class="col-3 ">
+        <p class="m-0 p-0">{{ticketId}}</p>
+      </div>
+      <div class="col-4 ">
+        <p class="m-0 p-0">from: {{availableFrom}}</p>
+        <p class="m-0 p-0">until: {{availableUntil}}</p>
+      </div>
+      <div class="col-3 ">
+        <a class="m-0 p-0" href="/profile/tickets/{{_id}}/delete">Delete</a>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+
+
+  <a href="/addTicket">Offer another ticket</a>
 </div>
-{{/each}}
-</div>
-
-
-
-<a href="/addTicket">Offer another ticket</a>

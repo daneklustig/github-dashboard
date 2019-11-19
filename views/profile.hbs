@@ -1,92 +1,36 @@
-<h2>Welcome, {{user.username}}!</h2>
+<div class="content">
+  <h2><span class="yellow first-line">Welcome, {{user.username}}!</span></h2>
 
-{{!-- <form class="profile-form" action="/profile" method="post">
-
-  <div class="container customStyle">
-    <div class="row justify-content-start">
-      <div class="col-6 text-right px-4">
-        <label for="gender" name="gender">Gender: </label>
-      </div>
-
-      <div class="col-6">
-
-        <select name="gender" id="gender" value={{user.gender}}>
-          <option name="empty" value=""></option>
-          <option name="woman" value="">Woman</option>
-          <option name="man" value="">Man</option>
-          <option name="non-binary" value="">Non-binary</option>
-        </select>
-      </div>
-
-
-      <div class="col-6 text-right">
-        <label for="name">Name: </label>
-      </div>
-      <div class="col-6">
-        <input type="text" name="name" id="name" value="{{user.name}}">
-      </div>
-
-
-      <div class="col-6 text-right">
-        <label for="surname">Surname: </label>
-      </div>
-      <div class="col-6">
-        <input type="text" name="surname" id="surname" value={{user.surname}}>
-      </div>
-
-      <div class="col-6 text-right">
-        <label for="email">Email: </label>
-      </div>
-      <div class="col-6">
-        <input type="email" name="email" id="email" value={{user.email}}>
-      </div>
-    </div>
+  <form class="profile-form" action="/profile" method="post">
+</div>
+<div class="container">
+  <div class="labelclass">
+    <label for="name">Name: </label>
   </div>
+  <div class="inputclass">
+    <input type="text" name="name" id="name" size="35" value="{{user.name}}">
+  </div>
+</div>
+<div class="container">
+  <div class="labelclass">
+    <label for="surname">Surname: </label>
+  </div>
+  <div class="inputclass">
+    <input type="text" name="surname" id="surname" size="35" value={{user.surname}}>
+  </div>
+</div>
 
-  <button type="submit">Save</button>
-</form> --}}
-
-<form class="profile-form" action="/profile" method="post">
-  <div class="container">
-    <div class="labelclass">
-      <label for="gender" name="gender">Gender: </label>
-    </div>
-    <div class="inputclass">
-      <select name="gender" id="gender" value={{user.gender}}>
-        <option name="empty" value=""></option>
-        <option name="woman" value="">Woman</option>
-        <option name="man" value="">Man</option>
-        <option name="non-binary" value="">Non-binary</option>
-      </select>
-    </div>
+<div class="container">
+  <div class="labelclass">
+    <label for="email">Email: </label>
   </div>
-  <div class="container">
-    <div class="labelclass">
-      <label for="name">Name: </label>
-    </div>
-    <div class="inputclass">
-      <input type="text" name="name" id="name" value="{{user.name}}">
-    </div>
+  <div class="inputclass">
+    <input type="email" name="email" id="email" size="35" value={{user.email}}>
   </div>
-  <div class="container">
-    <div class="labelclass">
-      <label for="surname">Surname: </label>
-    </div>
-    <div class="inputclass">
-      <input type="text" name="surname" id="surname" value={{user.surname}}>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="labelclass">
-      <label for="email">Email: </label>
-    </div>
-    <div class="inputclass">
-      <input type="email" name="email" id="email" value={{user.email}}>
-    </div>
-  </div>
-  <br>
-  <button class="button-form" type="submit">Save</button>
-  </div>
+</div>
+<br>
+<button class="button-profile-form" type="submit">Save</button>
+</div>
 
 </form>
+</div>

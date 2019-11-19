@@ -217,7 +217,9 @@ router.post("/profile", loginCheck1(), (req, res, next) => {
       surname: req.body.surname,
       email: req.body.email
     },
-    { new: true }
+    {
+      new: true
+    }
   )
     .then(updatedUser => {
       res.render(updatedUser);
@@ -226,7 +228,9 @@ router.post("/profile", loginCheck1(), (req, res, next) => {
 });
 
 router.get("/about", (req, res) => {
-  res.render("about", { loggedIn: req.user });
+  res.render("about", {
+    loggedIn: req.user
+  });
 });
 
 module.exports = router;
