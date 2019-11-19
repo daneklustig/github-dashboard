@@ -79,14 +79,7 @@ router.get("/addTicket", loginCheck2(), (req, res, next) => {
 
 router.post("/addTicket", loginCheck2(), (req, res, next) => {
   console.log("POST SERVER");
-<<<<<<< HEAD
   const { from, until } = req.body;
-=======
-  const {
-    from,
-    until
-  } = req.body;
->>>>>>> development
   Ticket.create({
     availableFrom: req.body.from,
     availableUntil: req.body.until,
@@ -114,24 +107,9 @@ router.get("/profile/:ticketId", (req, res) => {
 });
 
 router.post("/availableTickets", loginCheck3(), (req, res, next) => {
-<<<<<<< HEAD
-  let { from, until, zone } = req.body;
-
-  Ticket.find({
-    availableFrom: {
-      $lte: from
-    },
-    availableUntil: {
-      $gte: until
-    },
-    zone: zone
-  })
-    .then(tickets => {
-      console.log("´´´´´´´´´´´´´´´´´´", tickets);
-=======
   let {
     from,
-    until,
+    until
     // zone
   } = req.body;
 
@@ -173,45 +151,43 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
       price = 2.5;
     }
 
-    return price * days
-  }
-
+    return price * days;
+  };
 
   // console.log(zone, days, totalPrice);
 
   Ticket.find({
-      availableFrom: {
-        $lte: from
-      },
-      availableUntil: {
-        $gte: until
-      },
-      // zone: zone
-    })
+    availableFrom: {
+      $lte: from
+    },
+    availableUntil: {
+      $gte: until
+    }
+    // zone: zone
+  })
     .populate("owner")
     .then(tickets => {
       const totalTest = {
         totalPrice: totalPrice
-      }
+      };
       console.log(totalPrice);
 
       const allTickets = tickets.map(el => {
-        el.totalPrice = totalPrice(days, el.zone)
+        el.totalPrice = totalPrice(days, el.zone);
         // console.log(el.totalPrice)
-        return el
-      })
+        return el;
+      });
       // tickets.totalPrice = totalPrice
-      console.log("HI DANIEL, ", allTickets[0])
+      console.log("HI DANIEL, ", allTickets[0]);
       // totalPrice
 
->>>>>>> development
       res.render("availableTickets.hbs", {
         allTickets,
         from,
-        until
+        until,
+        loggedIn: req.user
         // price: totalPrice
       });
-
     })
     .catch(err => {
       next(err);
@@ -231,14 +207,12 @@ router.get("/profile/tickets/:ticketId/delete", loginCheck2(), (req, res) => {
       next(err);
     });
 });
-<<<<<<< HEAD
 
 router.post("/profile", loginCheck1(), (req, res, next) => {
   const id = req.user.id;
   User.findOneAndUpdate(
     { _id: id },
     {
-      gender: req.body.gender,
       name: req.body.name,
       surname: req.body.surname,
       email: req.body.email
@@ -246,25 +220,13 @@ router.post("/profile", loginCheck1(), (req, res, next) => {
     { new: true }
   )
     .then(updatedUser => {
-      res.send(updatedUser);
+      res.render(updatedUser);
     })
     .catch(err => console.log(err));
 });
 
-router.get(
-  "/availableTickets/ticketOverview",
-  loginCheck3(),
-  (req, res, next) => {
-    res.render("ticketOverview", {
-      loggedIn: req.user
-    });
-  }
-);
-
 router.get("/about", (req, res) => {
   res.render("about", { loggedIn: req.user });
 });
-=======
->>>>>>> development
 
 module.exports = router;

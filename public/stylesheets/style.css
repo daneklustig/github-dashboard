@@ -199,4 +199,11 @@ body:not(:-moz-handler-blocked) fieldset {
   display: flex;
   flex-direction: row; }
 
+.button-form {
+  position: relative;
+  width: 100px;
+  text-align: center;
+  display: block;
+  margin-left: 200px; }
+
 /*# sourceMappingURL=style.css.map */
