@@ -79,7 +79,14 @@ router.get("/addTicket", loginCheck2(), (req, res, next) => {
 
 router.post("/addTicket", loginCheck2(), (req, res, next) => {
   console.log("POST SERVER");
+<<<<<<< HEAD
   const { from, until } = req.body;
+=======
+  const {
+    from,
+    until
+  } = req.body;
+>>>>>>> development
   Ticket.create({
     availableFrom: req.body.from,
     availableUntil: req.body.until,
@@ -107,6 +114,7 @@ router.get("/profile/:ticketId", (req, res) => {
 });
 
 router.post("/availableTickets", loginCheck3(), (req, res, next) => {
+<<<<<<< HEAD
   let { from, until, zone } = req.body;
 
   Ticket.find({
@@ -120,9 +128,90 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
   })
     .then(tickets => {
       console.log("´´´´´´´´´´´´´´´´´´", tickets);
+=======
+  let {
+    from,
+    until,
+    // zone
+  } = req.body;
+
+  let dateFrom = new Date(from).getTime();
+  let dateUntil = new Date(until).getTime();
+  let days = (dateUntil - dateFrom) / (1000 * 3600 * 24) + 1;
+
+  // let price;
+
+  // if (zone === "AB" && days < 7) {
+  //   price = 3;
+  // } else if (zone === "AB" && days < 14) {
+  //   price = 2.5;
+  // } else if (zone === "AB") {
+  //   price = 2;
+  // } else if (zone === "ABC" && days < 7) {
+  //   price = 3.5;
+  // } else if (zone === "ABC" && days < 14) {
+  //   price = 3;
+  // } else {
+  //   price = 2.5;
+  // }
+
+  // totalPrice = days * price;
+  const totalPrice = (days, zone) => {
+    let price;
+
+    if (zone === "AB" && days < 7) {
+      price = 3;
+    } else if (zone === "AB" && days < 14) {
+      price = 2.5;
+    } else if (zone === "AB") {
+      price = 2;
+    } else if (zone === "ABC" && days < 7) {
+      price = 3.5;
+    } else if (zone === "ABC" && days < 14) {
+      price = 3;
+    } else {
+      price = 2.5;
+    }
+
+    return price * days
+  }
+
+
+  // console.log(zone, days, totalPrice);
+
+  Ticket.find({
+      availableFrom: {
+        $lte: from
+      },
+      availableUntil: {
+        $gte: until
+      },
+      // zone: zone
+    })
+    .populate("owner")
+    .then(tickets => {
+      const totalTest = {
+        totalPrice: totalPrice
+      }
+      console.log(totalPrice);
+
+      const allTickets = tickets.map(el => {
+        el.totalPrice = totalPrice(days, el.zone)
+        // console.log(el.totalPrice)
+        return el
+      })
+      // tickets.totalPrice = totalPrice
+      console.log("HI DANIEL, ", allTickets[0])
+      // totalPrice
+
+>>>>>>> development
       res.render("availableTickets.hbs", {
-        tickets: tickets
+        allTickets,
+        from,
+        until
+        // price: totalPrice
       });
+
     })
     .catch(err => {
       next(err);
@@ -142,6 +231,7 @@ router.get("/profile/tickets/:ticketId/delete", loginCheck2(), (req, res) => {
       next(err);
     });
 });
+<<<<<<< HEAD
 
 router.post("/profile", loginCheck1(), (req, res, next) => {
   const id = req.user.id;
@@ -174,5 +264,7 @@ router.get(
 router.get("/about", (req, res) => {
   res.render("about", { loggedIn: req.user });
 });
+=======
+>>>>>>> development
 
 module.exports = router;
