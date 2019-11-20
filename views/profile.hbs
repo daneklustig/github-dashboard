@@ -3,15 +3,15 @@
   <form class="profile-form" action="/profile" method="post">
     <div class="form-container">
       <label for="name">Name: </label>
-      <input type="text" name="name" id="name" size="35" value="{{user.name}}">
+      <input type="text" name="name" id="name" value="{{user.name}}">
     </div>
     <div class="form-container">
       <label for="surname">Surname: </label>
-      <input type="text" name="surname" id="surname" size="35" value={{user.surname}}>
+      <input type="text" name="surname" id="surname" value={{user.surname}}>
     </div>
     <div class="form-container">
       <label for="email">Email: </label>
-      <input type="email" name="email" id="email" size="35" value={{user.email}}>
+      <input type="email" name="email" id="email" value={{user.email}}>
     </div>
     <br>
     <button class="myButton" type="submit">Save</button>

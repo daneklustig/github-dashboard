@@ -103,7 +103,7 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
     return;
   }
 
-  if (from <= today || until <= today) {
+  if (from < today - 1 || until < today- 1) {
     res.render("addTicket", {
       message: "The dates cannot be in the past."
     });
@@ -167,7 +167,7 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
     return;
   }
 
-  if (from < today || until < today) {
+  if (from < today -1  || until < today - 1) {
     res.render("search", {
       message: "The dates cannot be in the past."
     });
