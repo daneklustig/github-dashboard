@@ -7,9 +7,13 @@ const reviewSchema = new Schema({
   rating: {
     type: Number,
     min: 1,
-    max: 5
+    max: 5,
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }
   }
 });
 
-const Review = mongoose.model('Review', reviewSchema);
+const Review = mongoose.model("Review", reviewSchema);
 module.exports = Review;

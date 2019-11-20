@@ -71,6 +71,23 @@ router.get("/profile", loginCheck1(), (req, res, next) => {
     });
 });
 
+router.get(
+  "/availableTickets/sellerProfile",
+  loginCheck1(),
+  (req, res, next) => {
+    User.findById(req.user.id)
+      .then(user => {
+        res.render("sellerProfile", {
+          user: user,
+          loggedIn: req.user
+        });
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
+);
+
 router.get("/addTicket", loginCheck2(), (req, res, next) => {
   res.render("addTicket", {
     loggedIn: req.user
@@ -79,7 +96,46 @@ router.get("/addTicket", loginCheck2(), (req, res, next) => {
 
 router.post("/addTicket", loginCheck2(), (req, res, next) => {
   console.log("POST SERVER");
-  const { from, until } = req.body;
+  const { ticketId, from, until, zone } = req.body;
+
+  var today = new Date().toISOString();
+
+  if (ticketId === "" || from === "" || until === "") {
+    res.render("addTicket", {
+      message: "Please, fill in all the fields."
+    });
+    return;
+  }
+
+  if (ticketId.length !== 14) {
+    res.render("addTicket", {
+      message:
+        "The ticket number must have 14 characters. Please, insert numbers only."
+    });
+    return;
+  }
+
+  if (from <= today || until <= today) {
+    res.render("addTicket", {
+      message: "The dates cannot be in the past."
+    });
+    return;
+  }
+
+  if (from > until) {
+    res.render("addTicket", {
+      message: "You have probably confused the dates."
+    });
+    return;
+  }
+
+  if (zone === "") {
+    res.render("addTicket", {
+      message: "Please, specify the zone."
+    });
+    return;
+  }
+
   Ticket.create({
     availableFrom: req.body.from,
     availableUntil: req.body.until,
@@ -95,13 +151,6 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
     });
 });
 
-let today = new Date();
-let dd = today.getDate();
-let mm = today.getMonth() + 1;
-let yyyy = today.getFullYear();
-var currentDate = yyyy + "-" + mm + "-" + dd;
-console.log(currentDate);
-
 router.get("/search", loginCheck3(), (req, res, next) => {
   res.render("search", {
     loggedIn: req.user
@@ -114,11 +163,39 @@ router.get("/profile/:ticketId", (req, res) => {
 });
 
 router.post("/availableTickets", loginCheck3(), (req, res, next) => {
-  let {
-    from,
-    until
-    // zone
-  } = req.body;
+  let { from, until, zone } = req.body;
+
+  var today = new Date().toISOString();
+
+  if (from === "" || until === "") {
+    res.render("search", {
+      message: "Please, fill in all the fields."
+    });
+    return;
+  }
+
+  if (from < today || until < today) {
+    res.render("search", {
+      message: "The dates cannot be in the past."
+    });
+    return;
+  }
+
+  if (from > until) {
+    res.render("search", {
+      message: "You have probably confused the dates."
+    });
+    return;
+  }
+
+  if (zone === "") {
+    res.render("search", {
+      message: "Please, specify the zone."
+    });
+    return;
+  }
+
+  // zone = zone ==== "AB" ? "AB" :
 
   let dateFrom = new Date(from).getTime();
   let dateUntil = new Date(until).getTime();
@@ -141,18 +218,18 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
   // }
 
   // totalPrice = days * price;
-  const totalPrice = (days, zone) => {
+  const totalPrice = (days, zoneInfo) => {
     let price;
 
-    if (zone === "AB" && days < 7) {
+    if (zoneInfo === "AB" && days < 7) {
       price = 3;
-    } else if (zone === "AB" && days < 14) {
+    } else if (zoneInfo === "AB" && days < 14) {
       price = 2.5;
-    } else if (zone === "AB") {
+    } else if (zoneInfo === "AB") {
       price = 2;
-    } else if (zone === "ABC" && days < 7) {
+    } else if (zoneInfo === "ABC" && days < 7) {
       price = 3.5;
-    } else if (zone === "ABC" && days < 14) {
+    } else if (zoneInfo === "ABC" && days < 14) {
       price = 3;
     } else {
       price = 2.5;
@@ -161,7 +238,8 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
     return price * days;
   };
 
-  // console.log(zone, days, totalPrice);
+  // console.log(zoneInfo, days, totalPrice);
+  const sortingNumber = zone === "AB" ? 1 : -1;
 
   Ticket.find({
     availableFrom: {
@@ -170,9 +248,11 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
     availableUntil: {
       $gte: until
     }
-    // zone: zone
   })
     .populate("owner")
+    .sort({
+      zone: sortingNumber
+    })
     .then(tickets => {
       const totalTest = {
         totalPrice: totalPrice
@@ -185,7 +265,7 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
         return el;
       });
       // tickets.totalPrice = totalPrice
-      console.log("HI DANIEL, ", allTickets[0]);
+      console.log("HI DANIEL, ", allTickets);
       // totalPrice
 
       res.render("availableTickets.hbs", {
@@ -218,7 +298,9 @@ router.get("/profile/tickets/:ticketId/delete", loginCheck2(), (req, res) => {
 router.post("/profile", loginCheck1(), (req, res, next) => {
   const id = req.user.id;
   User.findOneAndUpdate(
-    { _id: id },
+    {
+      _id: id
+    },
     {
       name: req.body.name,
       surname: req.body.surname,
