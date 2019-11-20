@@ -2,6 +2,9 @@
   {{#if allTickets}}
   <h2><span class="yellow first-line">There are {{allTickets.length}} available tickets</span></h2>
   <h2><span class="yellow second-line">from: {{from}}</span></h2>
+  {{#if message }}
+  <div class="error-message">{{ message }}</div>
+  {{/if}}
   <h2><span class="yellow third-line">until: {{until}}</span></h2>
 
 

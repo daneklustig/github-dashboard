@@ -95,6 +95,13 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
     });
 });
 
+let today = new Date();
+let dd = today.getDate();
+let mm = today.getMonth() + 1;
+let yyyy = today.getFullYear();
+var currentDate = yyyy + "-" + mm + "-" + dd;
+console.log(currentDate);
+
 router.get("/search", loginCheck3(), (req, res, next) => {
   res.render("search", {
     loggedIn: req.user
