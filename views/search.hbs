@@ -10,16 +10,28 @@
         <label for="until">Until: </label>
         <input type="date" name="until" id="until" placeholder="UNTIL">
       </div>
-      <div class="form-container">
-        <label for="zone">Zone: </label>
-        <div class="ABbutton">
-          <input type="radio" name="zone" value="AB" id="AB" checked="checked" />
-          <label for="AB">AB</label>
-          <input type="radio" name="zone" value="ABC" id="ABC" />
-          <label for="ABC">ABC</label>
+      <div class="radio-tile-group">
+        <div class="input-container">
+          <input class="radio-button" type="radio" name="zone" value="AB" id="AB" />
+          <div class="radio-tile">
+            <label for="AB" class="radio-tile-label">AB</label>
+          </div>
+        </div>
+        <div class="input-container">
+          <input class="radio-button" type="radio" name="zone" value="ABC" id="ABC" />
+          <div class="radio-tile">
+            <label for="ABC" class="radio-tile-label">ABC</label>
+          </div>
         </div>
       </div>
-      <button class="myButton" type="submit">GET your TICKET!</button>
-    </form>
   </div>
+  {{#if message }}
+  <div class="error-message"><span class="red">{{ message }}</span></div>
+  {{/if}}
+  <button class="myButton" id="form-button" type="submit">GET your TICKET!</button>
+  </form>
+
+
+
+</div>
 </div>
