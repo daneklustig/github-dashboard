@@ -1,36 +1,21 @@
 <div class="content">
   <h2><span class="yellow first-line">Welcome, {{user.username}}!</span></h2>
-
   <form class="profile-form" action="/profile" method="post">
+    <div class="form-container">
+      <label for="name">Name: </label>
+      <input type="text" name="name" id="name" size="35" value="{{user.name}}">
+    </div>
+    <div class="form-container">
+      <label for="surname">Surname: </label>
+      <input type="text" name="surname" id="surname" size="35" value={{user.surname}}>
+    </div>
+    <div class="form-container">
+      <label for="email">Email: </label>
+      <input type="email" name="email" id="email" size="35" value={{user.email}}>
+    </div>
+    <br>
+    <button class="myButton" type="submit">Save</button>
 </div>
-<div class="container">
-  <div class="labelclass">
-    <label for="name">Name: </label>
-  </div>
-  <div class="inputclass">
-    <input type="text" name="name" id="name" size="35" value="{{user.name}}">
-  </div>
-</div>
-<div class="container">
-  <div class="labelclass">
-    <label for="surname">Surname: </label>
-  </div>
-  <div class="inputclass">
-    <input type="text" name="surname" id="surname" size="35" value={{user.surname}}>
-  </div>
-</div>
-
-<div class="container">
-  <div class="labelclass">
-    <label for="email">Email: </label>
-  </div>
-  <div class="inputclass">
-    <input type="email" name="email" id="email" size="35" value={{user.email}}>
-  </div>
-</div>
-<br>
-<button class="button-profile-form" type="submit">Save</button>
-</div>
-
 </form>
+</div>
 </div>

@@ -54,7 +54,8 @@ h2 {
 }
 
 .content {
-  padding: 40px;
+  padding-top: 30px;
+  padding-left: 50px;
 }
 
 .myButton {
@@ -65,7 +66,7 @@ h2 {
   border: 1px solid #dcdcdc;
   display: inline-block;
   cursor: pointer;
-  color: #666666;
+  color: #007bff;
   font-size: 15px;
   font-weight: bold;
   padding: 6px 24px;
@@ -109,185 +110,31 @@ h2 {
   align-items: center;
 }
 
-/* VARS */
-$darkNavy: #213140;
-$teal1: #66b3fb;
-$teal2: #4b9dea;
-$charcoal: #555555;
-
-$activeShadow: 0 0 10px rgba($teal1, 0.5);
-
-/* MIXINS */
-@mixin focusOutline {
-  outline: dotted 1px #ccc;
-  outline-offset: 0.45rem;
-}
-
-@mixin hideInput {
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: -9999px;
-}
-
-@mixin breakpoint($point) {
-  @if $point==1100 {
-    @media (max-width: 1100px) {
-      @content;
-    }
-  } @else if $point==800 {
-    @media (max-width: 800px) {
-      @content;
-    }
-  }
-}
-
-/* STYLE THE HTML ELEMENTS (INCLUDES RESETS FOR THE DEFAULT FIELDSET AND LEGEND STYLES) */
-body,
-html {
-  margin: 0;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  background-color: #eee;
-
-  fieldset {
-    margin: 0;
-    padding: 2rem;
-    box-sizing: border-box;
-    display: block;
-    border: none;
-    border: solid 1px #ccc;
-    min-width: 0;
-    background-color: #fff;
-
-    legend {
-      margin: 0 0 1.5rem;
-      padding: 0;
-      width: 100%;
-      float: left;
-      display: table;
-      font-size: 1.5rem;
-      line-height: 140%;
-      font-weight: 600;
-      color: #333;
-
-      + * {
-        clear: both;
-      }
-    }
-  }
-
-  body:not(:-moz-handler-blocked) fieldset {
-    display: table-cell;
-  }
-
-  /* TOGGLE STYLING */
-  .toggle {
-    margin: 0 0 1.5rem;
-    box-sizing: border-box;
-    font-size: 0;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-
-    input {
-      @include hideInput;
-    }
-
-    input + label {
-      margin: 0;
-      padding: 0.75rem 2rem;
-      box-sizing: border-box;
-      position: relative;
-      display: inline-block;
-      border: solid 1px #ddd;
-      background-color: #fff;
-      font-size: 1rem;
-      line-height: 140%;
-      font-weight: 600;
-      text-align: center;
-      box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-      transition: border-color 0.15s ease-out, color 0.25s ease-out,
-        background-color 0.15s ease-out, box-shadow 0.15s ease-out;
-
-      &:first-of-type {
-        border-radius: 6px 0 0 6px;
-        border-right: none;
-      }
-
-      &:last-of-type {
-        border-radius: 0 6px 6px 0;
-        border-left: none;
-      }
-    }
-
-    input:hover + label {
-      border-color: $darkNavy;
-    }
-
-    input:checked + label {
-      background-color: $teal2;
-      color: #fff;
-      box-shadow: $activeShadow;
-      border-color: $teal2;
-      z-index: 1;
-    }
-
-    input:focus + label {
-      @include focusOutline;
-    }
-
-    @include breakpoint(800) {
-      input + label {
-        padding: 0.75rem 0.25rem;
-        flex: 0 0 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
-}
-
-form {
-  margin-top: 30px;
-}
-
-.button-profile-form {
-  color: #007bff;
-  background-color: transparent;
-  box-shadow: inset 0px 1px 0px 0px #ffffff;
-  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-  font-family: frutiger;
-  border-radius: 6px;
-  border: 1px solid #dcdcdc;
-  display: inline-block;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 6px 40px;
-  text-shadow: 0px 1px 0px #ffffff;
-  text-transform: none;
-  position: relative;
-}
-
-.container label {
+.form-container label {
   display: flex;
   flex-direction: row;
   width: 150px;
   text-align: right;
 }
 
-.container input {
+.form-container input {
   width: 300px;
   text-align: left;
 }
 
-.container {
+.form-container {
   display: flex;
   flex-direction: row;
+  margin-top: 10px;
+}
+
+form {
+  margin-top: 50px;
+  padding-left: 30px;
+  padding-right: 20px;
+}
+
+#until,
+#from {
+  width: 150px;
 }
