@@ -1,293 +1,141 @@
 @font-face {
-  font-family: frutiger;
-  src: url("/fonts/bvg.otf");
+	font-family: frutiger;
+	src: url("/fonts/bvg.otf");
 }
 
 * {
-  font-family: frutiger;
-  margin: 0;
-  padding: 0;
+	font-family: frutiger;
+	margin: 0;
+	padding: 0;
 }
 
 .home-container {
-  background-image: url("/images/berlin.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
+	background-image: url("/images/berlin.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
 }
 
 h2 {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
 }
 
 .yellow {
-  background-color: #ffe44d;
-  font-style: italic;
-  font-weight: bold;
-  padding-left: 10px;
-  padding-right: 15px;
+	background-color: #ffe44d;
+	font-style: italic;
+	font-weight: bold;
+	padding-left: 10px;
+	padding-right: 15px;
 }
 
 .first-line {
-  margin-left: 10px;
-  margin-top: 20px;
+	margin-left: 10px;
+	margin-top: 20px;
 }
 
 .second-line {
-  margin-left: 70px;
+	margin-left: 70px;
 }
 
 .third-line {
-  margin-left: 30px;
+	margin-left: 30px;
 }
 
 .content {
-  padding: 40px;
+	padding-top: 30px;
+	padding-left: 50px
 }
 
 .myButton {
-  box-shadow: inset 0px 1px 0px 0px #ffffff;
-  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-  background-color: #ffffff;
-  border-radius: 6px;
-  border: 1px solid #dcdcdc;
-  display: inline-block;
-  cursor: pointer;
-  color: #666666;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 6px 24px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #ffffff;
+	box-shadow: inset 0px 1px 0px 0px #ffffff;
+	background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	background-color: #ffffff;
+	border-radius: 6px;
+	border: 1px solid #dcdcdc;
+	display: inline-block;
+	cursor: pointer;
+	color: #007BFF;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 6px 24px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #ffffff;
 }
 
 .myButton:hover {
-  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-  background-color: #f6f6f6;
+	background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	background-color: #f6f6f6;
 }
 
 .myButton:active {
-  position: relative;
-  top: 1px;
+	position: relative;
+	top: 1px;
 }
 
 .ticket {
-  width: 80vw;
-  height: 15vh;
-  min-height: 70px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-style: solid;
-  border-width: 5px;
-  margin: 10px;
-  font-size: 1.5rem;
-  text-align: center;
+	width: 80vw;
+	height: 15vh;
+	min-height: 70px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	border-style: solid;
+	border-width: 5px;
+	margin: 10px;
+	font-size: 1.5rem;
+	text-align: center;
 }
 
 .ticket p {
-  height: 100%;
+	height: 100%;
 }
 
 .available-tickets {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-/* VARS */
-$darkNavy: #213140;
-$teal1: #66b3fb;
-$teal2: #4b9dea;
-$charcoal: #555555;
-
-$activeShadow: 0 0 10px rgba($teal1, 0.5);
-
-/* MIXINS */
-@mixin focusOutline {
-  outline: dotted 1px #ccc;
-  outline-offset: 0.45rem;
+.form-container label {
+	display: flex;
+	flex-direction: row;
+	width: 150px;
+	text-align: right;
 }
 
-@mixin hideInput {
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: -9999px;
+.form-container input {
+	width: 300px;
+	text-align: left;
+
 }
 
-@mixin breakpoint($point) {
-  @if $point==1100 {
-    @media (max-width: 1100px) {
-      @content;
-    }
-  } @else if $point==800 {
-    @media (max-width: 800px) {
-      @content;
-    }
-  }
-}
-
-/* STYLE THE HTML ELEMENTS (INCLUDES RESETS FOR THE DEFAULT FIELDSET AND LEGEND STYLES) */
-body,
-html {
-  margin: 0;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  background-color: #eee;
-
-  fieldset {
-    margin: 0;
-    padding: 2rem;
-    box-sizing: border-box;
-    display: block;
-    border: none;
-    border: solid 1px #ccc;
-    min-width: 0;
-    background-color: #fff;
-
-    legend {
-      margin: 0 0 1.5rem;
-      padding: 0;
-      width: 100%;
-      float: left;
-      display: table;
-      font-size: 1.5rem;
-      line-height: 140%;
-      font-weight: 600;
-      color: #333;
-
-      + * {
-        clear: both;
-      }
-    }
-  }
-
-  body:not(:-moz-handler-blocked) fieldset {
-    display: table-cell;
-  }
-
-  /* TOGGLE STYLING */
-  .toggle {
-    margin: 0 0 1.5rem;
-    box-sizing: border-box;
-    font-size: 0;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-
-    input {
-      @include hideInput;
-    }
-
-    input + label {
-      margin: 0;
-      padding: 0.75rem 2rem;
-      box-sizing: border-box;
-      position: relative;
-      display: inline-block;
-      border: solid 1px #ddd;
-      background-color: #fff;
-      font-size: 1rem;
-      line-height: 140%;
-      font-weight: 600;
-      text-align: center;
-      box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-      transition: border-color 0.15s ease-out, color 0.25s ease-out,
-        background-color 0.15s ease-out, box-shadow 0.15s ease-out;
-
-      &:first-of-type {
-        border-radius: 6px 0 0 6px;
-        border-right: none;
-      }
-
-      &:last-of-type {
-        border-radius: 0 6px 6px 0;
-        border-left: none;
-      }
-    }
-
-    input:hover + label {
-      border-color: $darkNavy;
-    }
-
-    input:checked + label {
-      background-color: $teal2;
-      color: #fff;
-      box-shadow: $activeShadow;
-      border-color: $teal2;
-      z-index: 1;
-    }
-
-    input:focus + label {
-      @include focusOutline;
-    }
-
-    @include breakpoint(800) {
-      input + label {
-        padding: 0.75rem 0.25rem;
-        flex: 0 0 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
-
-  .labelclass {
-    display: flex;
-    flex-direction: row;
-    width: 150px;
-    text-align: right;
-  }
-
-  .inputclass {
-    width: 300px;
-    text-align: left;
-  }
-
-  .container {
-    display: flex;
-    flex-direction: row;
-  }
+.form-container {
+	display: flex;
+	flex-direction: row;
+	margin-top: 10px;
 }
 
 form {
-  margin-top: 30px;
+	margin-top: 50px;
+	padding-left: 30px;
+	padding-right: 20px
 }
 
-.button-profile-form {
-  color: #007bff;
-  background-color: transparent;
-  box-shadow: inset 0px 1px 0px 0px #ffffff;
-  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-  font-family: frutiger;
-  border-radius: 6px;
-  border: 1px solid #dcdcdc;
-  display: inline-block;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 6px 40px;
-  text-shadow: 0px 1px 0px #ffffff;
-  text-transform: none;
-  margin-left: 266px;
+#until,
+#from {
+	width: 150px;
 }
