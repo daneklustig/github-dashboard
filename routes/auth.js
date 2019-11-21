@@ -95,8 +95,13 @@ router.post("/signup", (req, res, next) => {
         .then(() => {
           req.login(newUser, err => {
             if (err) next(err);
+<<<<<<< HEAD
             else res.redirect("/profile");
           });
+=======
+            else res.redirect("/profile2");
+          })
+>>>>>>> 28224c8ce927a0430335807911332e6c8f6348b5
         })
         .catch(err => {
           res.render("auth/signup", {

@@ -63,7 +63,6 @@ router.get("/profile/tickets", loginCheck2(), (req, res, next) => {
 router.get("/profile", loginCheck1(), (req, res, next) => {
   let msg = "Thank you for signing up! Please, fill in your profile";
 
-  //CHANGE FOR DEPLOY!!!!!!!!!!
   User.findById(req.user.id)
     .then(user => {
       res.render("profile", {
@@ -119,6 +118,19 @@ router.post("/:sellerId/rating", async (req, res, next) => {
       res.json(updatedUser);
     })
     .catch(err => console.log(err));
+});
+
+router.get("/profile2", loginCheck1(), (req, res, next) => {
+  User.findById(req.user.id)
+    .then(user => {
+      res.render("profile2", {
+        user: user,
+        loggedIn: req.user
+      });
+    })
+    .catch(err => {
+      next(err);
+    });
 });
 
 router.get("/addTicket", loginCheck2(), (req, res, next) => {
