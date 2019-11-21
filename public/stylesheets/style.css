@@ -139,7 +139,7 @@ form {
       justify-content: center;
       width: 100%;
       height: 100%;
-      border: 2px solid #007BFF;
+      border: 2px solid #007bff;
       border-radius: 5px;
       padding: 1rem;
       transition: transform 300ms ease; }
@@ -149,20 +149,20 @@ form {
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #007BFF;
+      color: #007bff;
       margin: 0;
       position: absolute;
       top: 50%;
       -ms-transform: translateY(-50%);
       transform: translateY(-50%); }
     .radio-tile-group .input-container .radio-button:checked + .radio-tile {
-      background-color: #007BFF;
-      border: 2px solid #007BFF;
+      background-color: #007bff;
+      border: 2px solid #007bff;
       color: white;
       transform: scale(1.1, 1.1); }
       .radio-tile-group .input-container .radio-button:checked + .radio-tile .radio-tile-label {
         color: white;
-        background-color: #007BFF; }
+        background-color: #007bff; }
 
 .myButton {
   box-shadow: inset 0px 1px 0px 0px #ffffff;
@@ -172,7 +172,7 @@ form {
   border: 1px solid #dcdcdc;
   display: inline-block;
   cursor: pointer;
-  color: #007BFF;
+  color: #007bff;
   font-size: 15px;
   font-weight: bold;
   padding: 6px 24px;

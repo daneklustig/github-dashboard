@@ -1,13 +1,13 @@
 @font-face {
-	font-family: frutiger;
-	src: url("/fonts/bvg.otf");
+  font-family: frutiger;
+  src: url("/fonts/bvg.otf");
 }
 
 * {
-	font-family: frutiger;
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  font-family: frutiger;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .pageWrapper {
@@ -27,217 +27,220 @@
 
 nav {
 	height: 10%;
+  background-image: url("/images/berlin.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 
 h2 {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 .center {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-right: -50%;
-	transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
 .yellow {
-	background-color: #ffe44d;
-	font-style: italic;
-	font-weight: bold;
-	padding-left: 10px;
-	padding-right: 15px;
+  background-color: #ffe44d;
+  font-style: italic;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 15px;
 }
 
 .red {
-	color: red;
+  color: red;
 }
 
 .first-line {
-	margin-left: 10px;
-	margin-top: 20px;
+  margin-left: 10px;
+  margin-top: 20px;
 }
 
 .second-line {
-	margin-left: 70px;
+  margin-left: 70px;
 }
 
 .third-line {
-	margin-left: 30px;
+  margin-left: 30px;
 }
 
 .content {
-	padding-top: 20px;
-	padding-left: 50px;
-	padding-right: 50px
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .content-about {
-	padding-top: 20px;
-	padding-left: 50px;
-	padding-right: 50px;
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .ticket {
-	width: 80vw;
-	height: 15vh;
-	min-height: 70px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	border-style: solid;
-	border-width: 5px;
-	margin: 10px;
-	font-size: 1.5rem;
-	text-align: center;
+  width: 80vw;
+  height: 15vh;
+  min-height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-width: 5px;
+  margin: 10px;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .ticket p {
-	height: 100%;
+  height: 100%;
 }
 
 .available-tickets {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-container label {
-	display: flex;
-	flex-direction: row;
-	width: 150px;
-	text-align: right;
+  display: flex;
+  flex-direction: row;
+  width: 150px;
+  text-align: right;
 }
 
 .form-container input {
-	width: 300px;
-	text-align: left;
-
+  width: 300px;
+  text-align: left;
 }
 
 .form-container {
-	display: flex;
-	flex-direction: row;
-	margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
 }
 
 form {
-	margin-top: 30px;
-	padding-left: 30px;
-	padding-right: 20px
+  margin-top: 30px;
+  padding-left: 30px;
+  padding-right: 20px;
 }
 
 #until,
 #from {
-	width: 150px;
+  width: 150px;
 }
 
-
 .radio-tile-group {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: left;
-	margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin: 1rem;
 
-	//set dimensions for invisible container
-	.input-container {
-		position: relative;
-		height: 3rem;
-		width: 7rem;
-		margin: 0.5rem;
+  //set dimensions for invisible container
+  .input-container {
+    position: relative;
+    height: 3rem;
+    width: 7rem;
+    margin: 0.5rem;
 
-		//make actual radio input invisible
-		// + stretch to fill container
-		.radio-button {
-			opacity: 0;
-			position: absolute;
-			top: 0;
-			left: 0;
-			height: 100%;
-			width: 100%;
-			margin: 0;
-			cursor: pointer;
-		}
+    //make actual radio input invisible
+    // + stretch to fill container
+    .radio-button {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      cursor: pointer;
+    }
 
-		//default tile styles
-		.radio-tile {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			width: 100%;
-			height: 100%;
-			border: 2px solid #007BFF;
-			border-radius: 5px;
-			padding: 1rem;
-			transition: transform 300ms ease;
-		}
+    //default tile styles
+    .radio-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      border: 2px solid #007bff;
+      border-radius: 5px;
+      padding: 1rem;
+      transition: transform 300ms ease;
+    }
 
-		.radio-tile-label {
-			text-align: center;
-			font-size: 1rem;
-			font-weight: 900;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-			color: #007BFF;
-			margin: 0;
-			position: absolute;
-			top: 50%;
-			-ms-transform: translateY(-50%);
-			transform: translateY(-50%);
-		}
+    .radio-tile-label {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #007bff;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
 
-		//active tile styles
-		.radio-button:checked+.radio-tile {
-			background-color: #007BFF;
-			border: 2px solid #007BFF;
-			color: white;
-			transform: scale(1.1, 1.1);
+    //active tile styles
+    .radio-button:checked + .radio-tile {
+      background-color: #007bff;
+      border: 2px solid #007bff;
+      color: white;
+      transform: scale(1.1, 1.1);
 
-			.radio-tile-label {
-				color: white;
-				background-color: #007BFF;
-			}
-		}
-	}
+      .radio-tile-label {
+        color: white;
+        background-color: #007bff;
+      }
+    }
+  }
 }
 
 .myButton {
-	box-shadow: inset 0px 1px 0px 0px #ffffff;
-	background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-	background-color: #ffffff;
-	border-radius: 6px;
-	border: 1px solid #dcdcdc;
-	display: inline-block;
-	cursor: pointer;
-	color: #007BFF;
-	font-size: 15px;
-	font-weight: bold;
-	padding: 6px 24px;
-	text-decoration: none;
-	text-shadow: 0px 1px 0px #ffffff;
+  box-shadow: inset 0px 1px 0px 0px #ffffff;
+  background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+  background-color: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  cursor: pointer;
+  color: #007bff;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffffff;
 }
 
 .myButton:hover {
-	background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-	background-color: #f6f6f6;
+  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+  background-color: #f6f6f6;
 }
 
 .myButton:active {
-	position: relative;
-	top: 1px;
+  position: relative;
+  top: 1px;
 }
 
 #form-button {
-	margin-left: 6.2rem;
-	margin-top: 2rem;
+  margin-left: 6.2rem;
+  margin-top: 2rem;
 }
 
 .account-message {
-	margin-top: 20px
+  margin-top: 20px;
 }
