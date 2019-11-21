@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Ticket = require("../models/Ticket");
 const User = require("../models/User");
+const Review = require("../models/Review");
+const axios = require("axios");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -59,9 +61,28 @@ router.get("/profile/tickets", loginCheck2(), (req, res, next) => {
 });
 
 router.get("/profile", loginCheck1(), (req, res, next) => {
+  console.log("//////////previous route", req.originalUrl);
   User.findById(req.user.id)
     .then(user => {
       res.render("profile", {
+        user: user,
+        loggedIn: req.user,
+        message: "Thank you for signing up! Please, fill in your profile"
+      });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+router.get("/availableTickets/:sellerId", loginCheck1(), (req, res, next) => {
+  //res.send(req.params.sellerId);
+  // const rateUp = userRate => {
+  //   return (userRate += 1);
+  // };
+  User.findById(req.params.sellerId)
+    .then(user => {
+      res.render("sellerProfile", {
         user: user,
         loggedIn: req.user
       });
@@ -71,22 +92,32 @@ router.get("/profile", loginCheck1(), (req, res, next) => {
     });
 });
 
-router.get(
-  "/availableTickets/sellerProfile",
-  loginCheck1(),
-  (req, res, next) => {
-    User.findById(req.user.id)
-      .then(user => {
-        res.render("sellerProfile", {
-          user: user,
-          loggedIn: req.user
-        });
-      })
-      .catch(err => {
-        next(err);
-      });
-  }
-);
+router.post("/:sellerId/rating", async (req, res, next) => {
+  const rate = req.body.rating;
+
+  const userId = req.params.sellerId;
+  //let rating = req.params.rating === 'up' ? ;
+  let seller = await User.findById(userId);
+  const { username, password, name, surname, email } = seller;
+
+  User.findByIdAndUpdate(
+    userId,
+    {
+      username,
+      password,
+      name,
+      surname,
+      email,
+      $push: { rate }
+    },
+    { new: true }
+  )
+    .then(updatedUser => {
+      console.log("/////////////", updatedUser);
+      res.json(updatedUser);
+    })
+    .catch(err => console.log(err));
+});
 
 router.get("/addTicket", loginCheck2(), (req, res, next) => {
   res.render("addTicket", {
@@ -115,7 +146,7 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
     return;
   }
 
-  if (from <= today || until <= today) {
+  if (from < today - 1 || until < today - 1) {
     res.render("addTicket", {
       message: "The dates cannot be in the past."
     });
@@ -174,7 +205,7 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
     return;
   }
 
-  if (from < today || until < today) {
+  if (from < today - 1 || until < today - 1) {
     res.render("search", {
       message: "The dates cannot be in the past."
     });

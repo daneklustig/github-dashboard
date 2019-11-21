@@ -61,6 +61,13 @@ h2 {
 .content {
   padding-top: 20px;
   padding-left: 50px;
+  padding-right: 50px;
+}
+
+.content-about {
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .ticket {
@@ -216,4 +223,8 @@ form {
 #form-button {
   margin-left: 6.2rem;
   margin-top: 2rem;
+}
+
+.account-message {
+  margin-top: 20px;
 }

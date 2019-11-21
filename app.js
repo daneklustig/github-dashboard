@@ -36,9 +36,11 @@ const app = express();
 // Middleware Setup
 app.use(logger("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 app.use(cookieParser());
 
 // Express View engine setup
@@ -65,7 +67,11 @@ hbs.registerHelper("ifUndefined", (value, options) => {
     return options.fn(this);
   }
 });
-
+hbs.registerHelper("rateUp", curRate => {
+  console.log("hhahahahhaha");
+  curRate += 1;
+  document.querySelector("userRating").innerText = curRate;
+});
 // default value for title local
 app.locals.title = "TICKET-SHARE";
 

@@ -1,2 +1,58 @@
-<p>Tickets' owner: {{ticket.owner.username}}</p>
-<a href="mailto:{{owner.email}}">Contact</a>
+<p>Ticket owner: {{user.username}}</p>
+<a href="mailto:{{user.email}}">Contact me</a>
+<br>
+<p id="userRating">1</p>
+<h1 id="finalRate"></h1>
+{{user.id}}
+<br>
+<button onclick="rateUp()"> + </button>
+<button onclick="rateDown()"> - </button>
+<button onclick="handleSubmit()">Submit rate</button>
+
+
+<script>
+  let rate
+  const rateUp = () => {
+    rate = document.querySelector("#userRating").innerText
+    rate *= 1
+    if (rate < 5) rate += 1
+    document.querySelector("#userRating").innerText = rate
+
+  }
+
+  const rateDown = () => {
+    rate = document.querySelector("#userRating").innerText
+    rate *= 1
+    if (rate > 1) rate -= 1
+    document.querySelector("#userRating").innerText = rate
+  }
+
+  const getRateAverage = (array) => {
+    let rateSum = array.reduce((acc, curr) => acc + curr)
+    rateSum = rateSum / array.length
+    return rateSum
+  }
+
+  let ratingHeartString = "♥".repeat(Math.floor(getRateAverage([{{ user.rate }}])))
+  document.querySelector("#finalRate").innerText = `{{user.username}} is loved that much: ${ratingHeartString}`
+
+
+  let sellerId = "{{ user.id }}"
+  let loggedInUsername = "{{loggedIn.username}}"
+  const handleSubmit = () => {
+    let rating = document.querySelector("#userRating").innerText * 1
+
+    axios.post(`/${sellerId}/rating`, { rating })
+      .then(response => {
+        console.log(response)
+        let rateArrayFromAxios = response.data.rate
+
+        let ratingArrayAverage = getRateAverage(rateArrayFromAxios)//return number
+
+        let heartString = "♥".repeat(Math.floor(ratingArrayAverage))
+        document.querySelector("#finalRate").innerText = `{{user.username}} is loved that much: ${heartString}`
+        document.querySelector("#userRating").innerText = 0
+      })
+  }
+
+</script>

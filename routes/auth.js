@@ -93,7 +93,10 @@ router.post("/signup", (req, res, next) => {
       newUser
         .save()
         .then(() => {
-          res.redirect("/");
+          req.login(newUser, err => {
+            if (err) next(err);
+            else res.redirect("/profile");
+          });
         })
         .catch(err => {
           res.render("auth/signup", {
@@ -109,9 +112,9 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/loginCheck1", (req, res) => {
-  res.render("auth/loginCheck1");
-});
+// router.get("/loginCheck1", (req, res) => {
+//   res.redirect("auth/loginCheck1");
+// });
 
 router.get("/loginCheck2", (req, res) => {
   res.render("auth/loginCheck2");
