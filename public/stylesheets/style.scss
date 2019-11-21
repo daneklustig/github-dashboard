@@ -41,6 +41,9 @@ nav {
   font-weight: bold;
   padding-left: 10px;
   padding-right: 15px;
+  // margin-left: 20px;
+  // margin-right: 20px;
+  // max-width: auto;
 }
 
 .red {
@@ -110,6 +113,36 @@ nav {
   text-align: right;
 }
 
+#form-button {
+  margin-left: 6.2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 360px) {
+  .profile-form {
+    padding-left: 5px;
+  }
+  .first-line {
+    margin-left: 0;
+  }
+  #form-button {
+    max-width: auto;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  .radio-title {
+    margin: auto;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-container label {
+    margin-right: 10px;
+  }
+}
+
 .form-container input {
   width: 300px;
   text-align: left;
@@ -124,7 +157,7 @@ nav {
 form {
   margin-top: 30px;
   padding-left: 30px;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
 #until,
@@ -231,11 +264,6 @@ form {
   top: 1px;
 }
 
-#form-button {
-  margin-left: 6.2rem;
-  margin-top: 2rem;
-}
-
 .account-message {
   margin-top: 20px;
 }
@@ -246,12 +274,31 @@ form {
   }
   .radio-tile-group {
     margin-left: 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .content {
     padding-top: 20px;
     padding-right: 20px;
     padding-left: 20px;
   }
+
+  .content-about {
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .text-box {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  #ticketId {
+    width: auto;
+  }
+
 }
 
 @media only screen and (min-device-width: 551px) {
@@ -260,5 +307,24 @@ form {
   }
   .radio-tile-group {
     margin-left: 1rem;
+  }
+  .text-box {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+}
+
+.text-box {
+  margin-top: 30px;
+  margin-bottom: 45px;
+  width: auto;
+  text-align: justify;
+}
+
+@media (max-width: 360px) {
+  .text-box {
+    max-width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
   }
 }
