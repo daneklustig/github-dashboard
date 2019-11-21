@@ -21,45 +21,49 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <a class="navbar-brand col-8" href="/">
-      <h2 class="m-0 p-0"><strong>{{title}}</strong></h2>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse col-8" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/addTicket">Add a ticket</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-        {{#if loggedIn}}
-
-        <li class="nav-item">
-          <a class="nav-link" href="/profile">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/logout">Log out</a>
-        </li>
-        {{else}}
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/signup">Sign up</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/login1">Log in</a>
-        </li>
-        {{/if}}
+  <div class="pageWrapper">
 
 
-      </ul>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <a class="navbar-brand col-8" href="/">
+        <h2 class="m-0 p-0"><strong>{{title}}</strong></h2>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse col-8" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/addTicket">Add a ticket</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          {{#if loggedIn}}
 
-  {{{body}}}
+          <li class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/logout">Log out</a>
+          </li>
+          {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/signup">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/login1">Log in</a>
+          </li>
+          {{/if}}
+
+
+        </ul>
+      </div>
+    </nav>
+
+    {{{body}}}
+  </div>
 
   <script src="/javascripts/script.js"></script>
 

@@ -8,12 +8,20 @@
   padding: 0;
   box-sizing: border-box; }
 
+.pageWrapper {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box; }
+
 .home-container {
   background-image: url("/images/berlin.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
+  height: 90%;
   width: 100%; }
+
+nav {
+  height: 10%; }
 
 h2 {
   overflow: hidden; }

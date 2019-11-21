@@ -313,10 +313,11 @@ router.post("/profile", loginCheck1(), (req, res, next) => {
       new: true
     })
     .then(updatedUser => {
-      res.render(updatedUser);
+      res.redirect('/profile');
     })
     .catch(err => console.log(err));
 });
+
 
 router.get("/about", (req, res) => {
   res.render("about", {
