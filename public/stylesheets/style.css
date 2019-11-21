@@ -212,6 +212,9 @@ form {
 .account-message {
   margin-top: 20px; }
 
+input {
+  border: 1px solid black; }
+
 @media only screen and (max-device-width: 550px) {
   .hide-mobile {
     display: none; }

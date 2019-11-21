@@ -5,15 +5,14 @@
   <div class="available-tickets">
     {{#each tickets}}
     <div class="ticket">
-      <div class="col-2 ">
+      <div class="col-1 ">
         <p class="m-0 p-0">{{zone}}</p>
-      </div>
-      <div class="col-3 ">
-        <p class="m-0 p-0">{{ticketId}}</p>
       </div>
       <div class="col-4 ">
         <p class="m-0 p-0">from: {{availableFrom}}</p>
-        <p class="m-0 p-0">until: {{availableUntil}}</p>
+      </div>
+      <div class="col-4 ">
+        <p class="m-0 p-0 hide-mobile">until: {{availableUntil}}</p>
       </div>
       <div class="col-3 ">
         <a class="m-0 p-0" href="/profile/tickets/{{_id}}/delete">Delete</a>
