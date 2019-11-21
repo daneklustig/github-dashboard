@@ -69,8 +69,7 @@ router.post("/signup", (req, res, next) => {
     return;
   }
 
-  User.findOne(
-    {
+  User.findOne({
       username
     },
     "username",
@@ -93,15 +92,17 @@ router.post("/signup", (req, res, next) => {
       newUser
         .save()
         .then(() => {
-          res.redirect("/");
+          req.login(newUser, err => {
+            if (err) next(err);
+            else res.redirect("/profile");
+          })
         })
         .catch(err => {
           res.render("auth/signup", {
             message: "Something went wrong"
           });
         });
-    }
-  );
+    });
 });
 
 router.get("/logout", (req, res) => {
