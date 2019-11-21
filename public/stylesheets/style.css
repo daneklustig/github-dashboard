@@ -93,6 +93,27 @@ nav {
   width: 150px;
   text-align: right; }
 
+#form-button {
+  margin-left: 6.2rem;
+  margin-top: 2rem; }
+
+@media (max-width: 360px) {
+  .profile-form {
+    padding-left: 5px; }
+  .first-line {
+    margin-left: 0; }
+  #form-button {
+    max-width: auto;
+    margin-left: 40px;
+    margin-right: 40px; }
+  .radio-title {
+    margin: auto;
+    max-width: 100%;
+    display: flex;
+    justify-content: center; }
+  .form-container label {
+    margin-right: 10px; } }
+
 .form-container input {
   width: 300px;
   text-align: left; }
@@ -185,11 +206,21 @@ form {
   position: relative;
   top: 1px; }
 
-#form-button {
-  margin-left: 6.2rem;
-  margin-top: 2rem; }
-
 .account-message {
   margin-top: 20px; }
+
+.text-box {
+  margin-left: 120px;
+  margin-right: 120px;
+  margin-top: 30px;
+  margin-bottom: 45px;
+  width: auto;
+  text-align: justify; }
+
+@media (max-width: 360px) {
+  .text-box {
+    max-width: 100%;
+    margin-left: 20px;
+    margin-right: 20px; } }
 
 /*# sourceMappingURL=style.css.map */
