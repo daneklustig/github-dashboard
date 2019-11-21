@@ -9,32 +9,26 @@
   box-sizing: border-box; }
 
 .pageWrapper {
-  height: 100vh;
-  width: 100vw;
-  box-sizing: border-box; }
+  height: 93vh;
+  width: 100vw; }
 
 .home-container {
   background-image: url("/images/berlin.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 90%;
+  height: 100%;
   width: 100%; }
 
 nav {
-  height: 10%; }
-
-h2 {
-  overflow: hidden; }
+  width: 100vw; }
 
 .center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%); }
+  justify-content: center;
+  width: 100%;
+  height: 100%; }
 
 .yellow {
   background-color: #ffe44d;
@@ -45,6 +39,9 @@ h2 {
 
 .red {
   color: red; }
+
+.error-message {
+  margin-top: 20px; }
 
 .first-line {
   margin-left: 10px;
@@ -70,6 +67,7 @@ h2 {
   width: 80vw;
   height: 15vh;
   min-height: 70px;
+  min-width: 400px;
   display: flex;
   flex-direction: row;
   justify-content: center;

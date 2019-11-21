@@ -11,7 +11,7 @@
         <input id="password" type="password" name="password" placeholder="Your password">
       </div>
       {{#if message }}
-      <div class="error-message">{{ message }}</div>
+      <div class="error-message"><span class="red"> {{ message }}</span></div>
       {{/if}}
       <button class="myButton" id="form-button">Create account</button>
       <p class="account-message">Do you already have an account?<a href="/auth/login1"> Log in!</a>

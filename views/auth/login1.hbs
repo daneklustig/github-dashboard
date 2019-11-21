@@ -10,9 +10,9 @@
       <input id="password" type="password" name="password" placeholder="Your password">
     </div>
     {{#if message }}
-    <div class="error-message" class="red">{{ message }}</div>
+    <div class="error-message"><span class="red"> {{ message }}</span></div>
     {{/if}}
-    <button class="myButton" id="form-button">Login</button>
+    <button class="myButton" id="form-button">Log in!</button>
     <p class="account-message">Don't have an account yet?<a href="/auth/signup"> Sign up!</a>
     </p>
   </form>
