@@ -69,7 +69,8 @@ router.post("/signup", (req, res, next) => {
     return;
   }
 
-  User.findOne({
+  User.findOne(
+    {
       username
     },
     "username",
@@ -95,14 +96,15 @@ router.post("/signup", (req, res, next) => {
           req.login(newUser, err => {
             if (err) next(err);
             else res.redirect("/profile");
-          })
+          });
         })
         .catch(err => {
           res.render("auth/signup", {
             message: "Something went wrong"
           });
         });
-    });
+    }
+  );
 });
 
 router.get("/logout", (req, res) => {
@@ -110,9 +112,9 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/loginCheck1", (req, res) => {
-  res.render("auth/loginCheck1");
-});
+// router.get("/loginCheck1", (req, res) => {
+//   res.redirect("auth/loginCheck1");
+// });
 
 router.get("/loginCheck2", (req, res) => {
   res.render("auth/loginCheck2");

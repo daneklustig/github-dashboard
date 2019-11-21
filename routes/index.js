@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Ticket = require("../models/Ticket");
 const User = require("../models/User");
+const Review = require("../models/Review");
+const axios = require("axios");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -44,8 +46,8 @@ router.get("/profile/tickets", loginCheck2(), (req, res, next) => {
 
   const owner = req.user;
   Ticket.find({
-      owner
-    })
+    owner
+  })
     .populate("owner")
     .then(tickets => {
       return res.render("myTickets", {
@@ -59,9 +61,28 @@ router.get("/profile/tickets", loginCheck2(), (req, res, next) => {
 });
 
 router.get("/profile", loginCheck1(), (req, res, next) => {
+  console.log("//////////previous route", req.originalUrl);
   User.findById(req.user.id)
     .then(user => {
       res.render("profile", {
+        user: user,
+        loggedIn: req.user,
+        message: "Thank you for signing up! Please, fill in your profile"
+      });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+router.get("/availableTickets/:sellerId", loginCheck1(), (req, res, next) => {
+  //res.send(req.params.sellerId);
+  // const rateUp = userRate => {
+  //   return (userRate += 1);
+  // };
+  User.findById(req.params.sellerId)
+    .then(user => {
+      res.render("sellerProfile", {
         user: user,
         loggedIn: req.user
       });
@@ -69,6 +90,33 @@ router.get("/profile", loginCheck1(), (req, res, next) => {
     .catch(err => {
       next(err);
     });
+});
+
+router.post("/:sellerId/rating", async (req, res, next) => {
+  const rate = req.body.rating;
+
+  const userId = req.params.sellerId;
+  //let rating = req.params.rating === 'up' ? ;
+  let seller = await User.findById(userId);
+  const { username, password, name, surname, email } = seller;
+
+  User.findByIdAndUpdate(
+    userId,
+    {
+      username,
+      password,
+      name,
+      surname,
+      email,
+      $push: { rate }
+    },
+    { new: true }
+  )
+    .then(updatedUser => {
+      console.log("/////////////", updatedUser);
+      res.json(updatedUser);
+    })
+    .catch(err => console.log(err));
 });
 
 router.get("/addTicket", loginCheck2(), (req, res, next) => {
@@ -79,15 +127,9 @@ router.get("/addTicket", loginCheck2(), (req, res, next) => {
 
 router.post("/addTicket", loginCheck2(), (req, res, next) => {
   console.log("POST SERVER");
-  const {
-    ticketId,
-    from,
-    until,
-    zone
-  } = req.body;
+  const { ticketId, from, until, zone } = req.body;
 
-  var today = new Date().toISOString()
-
+  var today = new Date().toISOString();
 
   if (ticketId === "" || from === "" || until === "") {
     res.render("addTicket", {
@@ -98,12 +140,13 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
 
   if (ticketId.length !== 14) {
     res.render("addTicket", {
-      message: "The ticket number must have 14 characters. Please, insert numbers only."
+      message:
+        "The ticket number must have 14 characters. Please, insert numbers only."
     });
     return;
   }
 
-  if (from < today - 1 || until < today- 1) {
+  if (from < today - 1 || until < today - 1) {
     res.render("addTicket", {
       message: "The dates cannot be in the past."
     });
@@ -125,12 +168,12 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
   }
 
   Ticket.create({
-      availableFrom: req.body.from,
-      availableUntil: req.body.until,
-      zone: req.body.zone,
-      owner: req.user._id,
-      ticketId: req.body.ticketId
-    })
+    availableFrom: req.body.from,
+    availableUntil: req.body.until,
+    zone: req.body.zone,
+    owner: req.user._id,
+    ticketId: req.body.ticketId
+  })
     .then(() => {
       res.redirect(`/profile/tickets`);
     })
@@ -138,7 +181,6 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
       next(err);
     });
 });
-
 
 router.get("/search", loginCheck3(), (req, res, next) => {
   res.render("search", {
@@ -152,13 +194,9 @@ router.get("/profile/:ticketId", (req, res) => {
 });
 
 router.post("/availableTickets", loginCheck3(), (req, res, next) => {
-  let {
-    from,
-    until,
-    zone
-  } = req.body;
+  let { from, until, zone } = req.body;
 
-  var today = new Date().toISOString()
+  var today = new Date().toISOString();
 
   if (from === "" || until === "") {
     res.render("search", {
@@ -167,7 +205,7 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
     return;
   }
 
-  if (from < today -1  || until < today - 1) {
+  if (from < today - 1 || until < today - 1) {
     res.render("search", {
       message: "The dates cannot be in the past."
     });
@@ -188,7 +226,7 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
     return;
   }
 
-  // zone = zone ==== "AB" ? "AB" : 
+  // zone = zone ==== "AB" ? "AB" :
 
   let dateFrom = new Date(from).getTime();
   let dateUntil = new Date(until).getTime();
@@ -232,18 +270,18 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
   };
 
   // console.log(zoneInfo, days, totalPrice);
-  const sortingNumber = zone === "AB" ? 1 : -1
+  const sortingNumber = zone === "AB" ? 1 : -1;
 
   Ticket.find({
-      availableFrom: {
-        $lte: from
-      },
-      availableUntil: {
-        $gte: until
-      },
-
-    })
-    .populate("owner").sort({
+    availableFrom: {
+      $lte: from
+    },
+    availableUntil: {
+      $gte: until
+    }
+  })
+    .populate("owner")
+    .sort({
       zone: sortingNumber
     })
     .then(tickets => {
@@ -290,15 +328,19 @@ router.get("/profile/tickets/:ticketId/delete", loginCheck2(), (req, res) => {
 
 router.post("/profile", loginCheck1(), (req, res, next) => {
   const id = req.user.id;
-  User.findOneAndUpdate({
+  User.findOneAndUpdate(
+    {
       _id: id
-    }, {
+    },
+    {
       name: req.body.name,
       surname: req.body.surname,
       email: req.body.email
-    }, {
+    },
+    {
       new: true
-    })
+    }
+  )
     .then(updatedUser => {
       res.render(updatedUser);
     })
