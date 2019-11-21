@@ -61,7 +61,9 @@ router.get("/profile/tickets", loginCheck2(), (req, res, next) => {
 });
 
 router.get("/profile", loginCheck1(), (req, res, next) => {
-  console.log("//////////previous route", req.originalUrl);
+  let msg = "Thank you for signing up! Please, fill in your profile";
+
+  //CHANGE FOR DEPLOY!!!!!!!!!!
   User.findById(req.user.id)
     .then(user => {
       res.render("profile", {
