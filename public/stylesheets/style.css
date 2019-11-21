@@ -115,7 +115,7 @@ form {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  margin: 1rem; }
+  margin-top: 1.5rem; }
   .radio-tile-group .input-container {
     position: relative;
     height: 3rem;
@@ -162,6 +162,9 @@ form {
         color: white;
         background-color: #007bff; }
 
+#home-button {
+  margin-top: 20px; }
+
 .myButton {
   box-shadow: inset 0px 1px 0px 0px #ffffff;
   background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
@@ -191,5 +194,21 @@ form {
 
 .account-message {
   margin-top: 20px; }
+
+@media only screen and (max-device-width: 550px) {
+  .hide-mobile {
+    display: none; }
+  .radio-tile-group {
+    margin-left: 0rem; }
+  .content {
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px; } }
+
+@media only screen and (min-device-width: 551px) {
+  .show-mobile {
+    display: none; }
+  .radio-tile-group {
+    margin-left: 1rem; } }
 
 /*# sourceMappingURL=style.css.map */
