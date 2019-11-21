@@ -94,7 +94,7 @@ router.post("/signup", (req, res, next) => {
         .then(() => {
           req.login(newUser, err => {
             if (err) next(err);
-            else res.redirect("/profile");
+            else res.redirect("/profile2");
           })
         })
         .catch(err => {

@@ -71,6 +71,19 @@ router.get("/profile", loginCheck1(), (req, res, next) => {
     });
 });
 
+router.get("/profile2", loginCheck1(), (req, res, next) => {
+  User.findById(req.user.id)
+    .then(user => {
+      res.render("profile2", {
+        user: user,
+        loggedIn: req.user
+      });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
 router.get("/addTicket", loginCheck2(), (req, res, next) => {
   res.render("addTicket", {
     loggedIn: req.user
@@ -103,7 +116,7 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
     return;
   }
 
-  if (from < today - 1 || until < today- 1) {
+  if (from < today - 1 || until < today - 1) {
     res.render("addTicket", {
       message: "The dates cannot be in the past."
     });
@@ -167,7 +180,7 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
     return;
   }
 
-  if (from < today -1  || until < today - 1) {
+  if (from < today - 1 || until < today - 1) {
     res.render("search", {
       message: "The dates cannot be in the past."
     });
