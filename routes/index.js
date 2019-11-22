@@ -147,7 +147,8 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
 
   if (ticketId === "" || from === "" || until === "") {
     res.render("addTicket", {
-      message: "Please, fill in all the fields."
+      message: "Please, fill in all the fields.",
+      loggedIn: req.user
     });
     return;
   }
@@ -155,28 +156,32 @@ router.post("/addTicket", loginCheck2(), (req, res, next) => {
   if (ticketId.length !== 14) {
     res.render("addTicket", {
       message:
-        "The ticket number must have 14 characters. Please, insert numbers only."
+        "The ticket number must have 14 characters. Please, insert numbers only.",
+      loggedIn: req.user
     });
     return;
   }
 
   if (from < today - 1 || until < today - 1) {
     res.render("addTicket", {
-      message: "The dates cannot be in the past."
+      message: "The dates cannot be in the past.",
+      loggedIn: req.user
     });
     return;
   }
 
   if (from > until) {
     res.render("addTicket", {
-      message: "You have probably confused the dates."
+      message: "You have probably confused the dates.",
+      loggedIn: req.user
     });
     return;
   }
 
   if (zone === "") {
     res.render("addTicket", {
-      message: "Please, specify the zone."
+      message: "Please, specify the zone.",
+      loggedIn: req.user
     });
     return;
   }
@@ -214,28 +219,32 @@ router.post("/availableTickets", loginCheck3(), (req, res, next) => {
 
   if (from === "" || until === "") {
     res.render("search", {
-      message: "Please, fill in all the fields."
+      message: "Please, fill in all the fields.",
+      loggedIn: req.user
     });
     return;
   }
 
   if (from < today - 1 || until < today - 1) {
     res.render("search", {
-      message: "The dates cannot be in the past."
+      message: "The dates cannot be in the past.",
+      loggedIn: req.user
     });
     return;
   }
 
   if (from > until) {
     res.render("search", {
-      message: "You have probably confused the dates."
+      message: "You have probably confused the dates.",
+      loggedIn: req.user
     });
     return;
   }
 
   if (zone === "") {
     res.render("search", {
-      message: "Please, specify the zone."
+      message: "Please, specify the zone.",
+      loggedIn: req.user
     });
     return;
   }
@@ -356,11 +365,10 @@ router.post("/profile", loginCheck1(), (req, res, next) => {
     }
   )
     .then(updatedUser => {
-      res.redirect('/profile');
+      res.redirect("/profile");
     })
     .catch(err => console.log(err));
 });
-
 
 router.get("/about", (req, res) => {
   res.render("about", {
