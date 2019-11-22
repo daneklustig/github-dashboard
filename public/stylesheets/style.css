@@ -76,7 +76,8 @@ nav {
   border-width: 5px;
   margin: 10px;
   font-size: 1.5rem;
-  text-align: center; }
+  text-align: center;
+  padding-right: 15px; }
 
 .ticket p {
   height: 100%; }
